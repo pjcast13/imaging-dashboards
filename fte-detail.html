@@ -205,6 +205,60 @@ var App = (() => {
     );
   }
 
+  // Rollup card (own tab state)
+  function RollupCard(props) {
+    var group = props.group, label = props.label, avgTotal = props.avgTotal, sparkVals = props.sparkVals;
+    var _tab = useState('roles'), activeTab = _tab[0], setActiveTab = _tab[1];
+
+    // Pay type rows
+    var payRows = [], payTotPeriods = PERIODS.map(function() { return 0; }), payTotFytd = 0;
+    PAY_TYPES.forEach(function(pt) {
+      var periods = PERIODS.map(function(pp, pi) { var v = group.periods[pi][pt] || 0; payTotPeriods[pi] += v; return v; });
+      var fytd = periods.reduce(function(a, b) { return a + b; }, 0);
+      payTotFytd += fytd;
+      payRows.push({ label: PAY_TYPE_LABELS[pt], periods: periods, fytd: fytd });
+    });
+
+    // Role rows
+    var roleRows = [], roleTotPeriods = PERIODS.map(function() { return 0; }), roleTotFytd = 0;
+    var allRoles = {};
+    PERIODS.forEach(function(pp, pi) { Object.keys(group.roles[pi]).forEach(function(r) { allRoles[r] = true; }); });
+    ROLE_ORDER.forEach(function(role) {
+      if (!allRoles[role]) return;
+      var periods = PERIODS.map(function(pp, pi) { var v = group.roles[pi][role] || 0; roleTotPeriods[pi] += v; return v; });
+      var fytd = periods.reduce(function(a, b) { return a + b; }, 0);
+      roleTotFytd += fytd;
+      roleRows.push({ label: role, periods: periods, fytd: fytd });
+      delete allRoles[role];
+    });
+    Object.keys(allRoles).forEach(function(role) {
+      var periods = PERIODS.map(function(pp, pi) { var v = group.roles[pi][role] || 0; roleTotPeriods[pi] += v; return v; });
+      var fytd = periods.reduce(function(a, b) { return a + b; }, 0);
+      roleTotFytd += fytd;
+      roleRows.push({ label: role, periods: periods, fytd: fytd });
+    });
+
+    var budgetRow = group.totalBudget > 0 ? { periods: PERIODS.map(function() { return group.totalBudget; }), fytd: group.totalBudget } : null;
+    var tabStyle = function(t) { return { padding: '4px 12px', borderRadius: '4px', border: 'none', cursor: 'pointer', fontSize: '11px', fontWeight: '600', background: activeTab === t ? '#0f172a' : '#f1f5f9', color: activeTab === t ? 'white' : '#64748b' }; };
+
+    return React.createElement('div', { style: { background: 'white', borderRadius: '8px', padding: '14px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } },
+      React.createElement('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' } },
+        React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: '10px' } },
+          React.createElement('span', { style: { fontSize: '14px', fontWeight: '700', color: '#0f172a' } }, label),
+          React.createElement('span', { style: { fontSize: '11px', color: '#94a3b8' } }, group.ccs.length + ' sites | Avg ' + avgTotal.toFixed(1) + ' FTE' + (group.totalBudget > 0 ? ' | Flex ' + group.totalBudget.toFixed(1) : '')),
+          React.createElement('div', { style: { display: 'flex', gap: '3px' } },
+            React.createElement('button', { onClick: function() { setActiveTab('roles'); }, style: tabStyle('roles') }, 'By Role'),
+            React.createElement('button', { onClick: function() { setActiveTab('paytype'); }, style: tabStyle('paytype') }, 'By Pay Type')
+          )
+        ),
+        React.createElement(Sparkline, { values: sparkVals, width: 100, height: 24, budgetLine: group.totalBudget > 0 ? group.totalBudget : undefined })
+      ),
+      activeTab === 'roles'
+        ? React.createElement(PeriodTable, { rows: roleRows, totalRow: { periods: roleTotPeriods, fytd: roleTotFytd }, budgetRow: budgetRow })
+        : React.createElement(PeriodTable, { rows: payRows, totalRow: { periods: payTotPeriods, fytd: payTotFytd }, budgetRow: budgetRow })
+    );
+  }
+
   // Rollup view
   function RollupView(props) {
     var sites = props.sites, groupBy = props.groupBy;
@@ -216,9 +270,13 @@ var App = (() => {
       groups[key].ccs.push(cc); groups[key].totalBudget += site.budgetFTE || 0;
     });
     Object.keys(groups).forEach(function(key) {
+      groups[key].roles = PERIODS.map(function() { return {}; });
       groups[key].ccs.forEach(function(cc) {
         var site = data.sites[cc];
-        PERIODS.forEach(function(pp, pi) { PAY_TYPES.forEach(function(pt) { if (!groups[key].periods[pi][pt]) groups[key].periods[pi][pt] = 0; groups[key].periods[pi][pt] += site.payTypes[pt].periods[pi].fte; }); });
+        PERIODS.forEach(function(pp, pi) {
+          PAY_TYPES.forEach(function(pt) { if (!groups[key].periods[pi][pt]) groups[key].periods[pi][pt] = 0; groups[key].periods[pi][pt] += site.payTypes[pt].periods[pi].fte; });
+          Object.keys(site.roles).forEach(function(role) { if (!groups[key].roles[pi][role]) groups[key].roles[pi][role] = 0; groups[key].roles[pi][role] += site.roles[role].periods[pi].fte; });
+        });
       });
     });
     var sortedKeys = Object.keys(groups).sort(function(a, b) {
@@ -232,28 +290,7 @@ var App = (() => {
         var avgTotal = group.periods.reduce(function(s, p) { var t = 0; PAY_TYPES.forEach(function(pt) { t += p[pt] || 0; }); return s + t; }, 0) / PERIODS.length;
         var sparkVals = group.periods.map(function(p) { var t = 0; PAY_TYPES.forEach(function(pt) { t += p[pt] || 0; }); return t; });
 
-        // Build pay type rows for rollup
-        var payRows = [];
-        var totPeriods = PERIODS.map(function() { return 0; });
-        var totFytd = 0;
-        PAY_TYPES.forEach(function(pt) {
-          var periods = PERIODS.map(function(pp, pi) { var v = group.periods[pi][pt] || 0; totPeriods[pi] += v; return v; });
-          var fytd = periods.reduce(function(a, b) { return a + b; }, 0);
-          totFytd += fytd;
-          payRows.push({ label: PAY_TYPE_LABELS[pt], periods: periods, fytd: fytd });
-        });
-        var budgetRow = group.totalBudget > 0 ? { periods: PERIODS.map(function() { return group.totalBudget; }), fytd: group.totalBudget } : null;
-
-        return React.createElement('div', { key: key, style: { background: 'white', borderRadius: '8px', padding: '14px', boxShadow: '0 1px 3px rgba(0,0,0,0.06)' } },
-          React.createElement('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' } },
-            React.createElement('div', null,
-              React.createElement('span', { style: { fontSize: '14px', fontWeight: '700', color: '#0f172a' } }, label),
-              React.createElement('span', { style: { fontSize: '11px', color: '#94a3b8', marginLeft: '10px' } }, group.ccs.length + ' sites | Avg ' + avgTotal.toFixed(1) + ' FTE' + (group.totalBudget > 0 ? ' | Flex ' + group.totalBudget.toFixed(1) : ''))
-            ),
-            React.createElement(Sparkline, { values: sparkVals, width: 100, height: 24, budgetLine: group.totalBudget > 0 ? group.totalBudget : undefined })
-          ),
-          React.createElement(PeriodTable, { rows: payRows, totalRow: { periods: totPeriods, fytd: totFytd }, budgetRow: budgetRow })
-        );
+        return React.createElement(RollupCard, { key: key, group: group, label: label, avgTotal: avgTotal, sparkVals: sparkVals });
       })
     );
   }
