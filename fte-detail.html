@@ -212,9 +212,10 @@ var App = (() => {
 
     // Pay type rows
     var payRows = [], payTotPeriods = PERIODS.map(function() { return 0; }), payTotFytd = 0;
+    var nPeriods = PERIODS.length;
     PAY_TYPES.forEach(function(pt) {
       var periods = PERIODS.map(function(pp, pi) { var v = group.periods[pi][pt] || 0; payTotPeriods[pi] += v; return v; });
-      var fytd = periods.reduce(function(a, b) { return a + b; }, 0);
+      var fytd = periods.reduce(function(a, b) { return a + b; }, 0) / nPeriods;
       payTotFytd += fytd;
       payRows.push({ label: PAY_TYPE_LABELS[pt], periods: periods, fytd: fytd });
     });
@@ -226,14 +227,14 @@ var App = (() => {
     ROLE_ORDER.forEach(function(role) {
       if (!allRoles[role]) return;
       var periods = PERIODS.map(function(pp, pi) { var v = group.roles[pi][role] || 0; roleTotPeriods[pi] += v; return v; });
-      var fytd = periods.reduce(function(a, b) { return a + b; }, 0);
+      var fytd = periods.reduce(function(a, b) { return a + b; }, 0) / nPeriods;
       roleTotFytd += fytd;
       roleRows.push({ label: role, periods: periods, fytd: fytd });
       delete allRoles[role];
     });
     Object.keys(allRoles).forEach(function(role) {
       var periods = PERIODS.map(function(pp, pi) { var v = group.roles[pi][role] || 0; roleTotPeriods[pi] += v; return v; });
-      var fytd = periods.reduce(function(a, b) { return a + b; }, 0);
+      var fytd = periods.reduce(function(a, b) { return a + b; }, 0) / nPeriods;
       roleTotFytd += fytd;
       roleRows.push({ label: role, periods: periods, fytd: fytd });
     });
