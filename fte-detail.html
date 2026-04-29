@@ -69580,6 +69580,12 @@ var data = {
     return vals.length > 0 ? vals.reduce(function(a, b) { return a + b; }, 0) / vals.length : 0;
   }
 
+  function getRoleAvgFTE(site, role) {
+    if (!role || role === 'all' || !site.roles || !site.roles[role]) return 0;
+    var vals = site.roles[role].periods.map(function(p) { return p.fte; }).filter(function(v) { return v > 0; });
+    return vals.length > 0 ? vals.reduce(function(a, b) { return a + b; }, 0) / vals.length : 0;
+  }
+
   // Bullet graph
   function BulletGraph(props) {
     var actual = props.actual, target = props.target, width = props.width || 140, height = props.height || 18;
@@ -69838,11 +69844,19 @@ var data = {
     var _s6 = useState('modality'), rollupGroupBy = _s6[0], setRollupGroupBy = _s6[1];
     var _s7 = useState('variance'), sortKey = _s7[0], setSortKey = _s7[1];
     var _s8 = useState(true), sortDesc = _s8[0], setSortDesc = _s8[1];
+    var _s9 = useState('all'), roleFilter = _s9[0], setRoleFilter = _s9[1];
 
     var allSites = data.sites;
     var modalities = useMemo(function() { var s = {}; Object.values(allSites).forEach(function(x) { s[x.modality] = 1; }); return Object.keys(s).sort(); }, []);
     var locations = useMemo(function() { var s = {}; Object.values(allSites).forEach(function(x) { s[x.location] = 1; }); return Object.keys(s).sort(); }, []);
     var managers = useMemo(function() { var s = {}; Object.values(allSites).forEach(function(x) { s[x.manager] = 1; }); return Object.keys(s).sort(); }, []);
+    var availableRoles = useMemo(function() {
+      var s = {};
+      Object.values(allSites).forEach(function(x) { Object.keys(x.roles || {}).forEach(function(r) { s[r] = 1; }); });
+      var ordered = ROLE_ORDER.filter(function(r) { return s[r]; });
+      var extras = Object.keys(s).filter(function(r) { return ROLE_ORDER.indexOf(r) === -1; }).sort();
+      return ordered.concat(extras);
+    }, []);
 
     var filteredSites = useMemo(function() {
       var r = {};
@@ -69850,18 +69864,20 @@ var data = {
         if (modalityFilter !== 'all') { if (e[1].modality !== modalityFilter) return; }
         if (locationFilter !== 'all') { if (e[1].location !== locationFilter) return; }
         if (managerFilter !== 'all') { if (e[1].manager !== managerFilter) return; }
+        if (roleFilter !== 'all') { if (!e[1].roles || !e[1].roles[roleFilter]) return; }
         r[e[0]] = e[1];
       });
       return r;
-    }, [modalityFilter, locationFilter, managerFilter]);
+    }, [modalityFilter, locationFilter, managerFilter, roleFilter]);
 
     function getSortVal(cc) {
-      var s = filteredSites[cc], avg = getAvgFTE(s);
+      var s = filteredSites[cc];
+      var avg = roleFilter !== 'all' ? getRoleAvgFTE(s, roleFilter) : getAvgFTE(s);
       if (sortKey === 'name') return s.name.toLowerCase();
       if (sortKey === 'modality') return s.modality;
       if (sortKey === 'fte') return avg;
       if (sortKey === 'budget') return s.budgetFTE;
-      if (sortKey === 'variance') return s.budgetFTE > 0 ? (avg - s.budgetFTE) / s.budgetFTE : -999;
+      if (sortKey === 'variance') return roleFilter !== 'all' ? avg : (s.budgetFTE > 0 ? (avg - s.budgetFTE) / s.budgetFTE : -999);
       if (sortKey === 'manager') return s.manager;
       return 0;
     }
@@ -69878,9 +69894,15 @@ var data = {
 
     var totals = useMemo(function() {
       var t = { avgFTE: 0, budget: 0, productive: 0, nonProductive: 0, count: 0 };
-      Object.values(filteredSites).forEach(function(s) { t.avgFTE += getAvgFTE(s); t.budget += s.budgetFTE || 0; t.productive += s.productive.fytdFTE; t.nonProductive += s.nonProductive.fytdFTE; t.count++; });
+      Object.values(filteredSites).forEach(function(s) {
+        t.avgFTE += roleFilter !== 'all' ? getRoleAvgFTE(s, roleFilter) : getAvgFTE(s);
+        t.budget += s.budgetFTE || 0;
+        t.productive += s.productive.fytdFTE;
+        t.nonProductive += s.nonProductive.fytdFTE;
+        t.count++;
+      });
       return t;
-    }, [filteredSites]);
+    }, [filteredSites, roleFilter]);
     var portfolioVariance = totals.budget > 0 ? ((totals.avgFTE - totals.budget) / totals.budget * 100) : 0;
     var productivePct = (totals.productive + totals.nonProductive) > 0 ? (totals.productive / (totals.productive + totals.nonProductive) * 100) : 0;
 
@@ -69917,15 +69939,30 @@ var data = {
           makeSelect(locationFilter, setLocationFilter, locations, 'All Locations'),
           makeSelect(managerFilter, setManagerFilter, managers, 'All Managers'),
           React.createElement('div', { style: { fontSize: '11px', color: '#94a3b8', marginLeft: '8px' } }, Object.keys(filteredSites).length + ' of ' + Object.keys(allSites).length + ' sites')
+        ),
+        React.createElement('div', { style: { display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center', marginTop: '8px' } },
+          React.createElement('span', { style: { fontSize: '10px', color: '#64748b', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.05em', marginRight: '4px' } }, 'Role'),
+          ['all'].concat(availableRoles).map(function(r) {
+            var active = roleFilter === r;
+            var label = r === 'all' ? 'All' : r;
+            return React.createElement('button', {
+              key: r, onClick: function() { setRoleFilter(r); },
+              style: {
+                padding: '4px 10px', borderRadius: '14px', border: '1px solid ' + (active ? '#0f172a' : '#e2e8f0'),
+                cursor: 'pointer', fontSize: '11px', fontWeight: '600',
+                background: active ? '#0f172a' : 'white', color: active ? 'white' : '#475569'
+              }
+            }, label);
+          })
         )
       ),
       // KPI bar
       React.createElement('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '10px', marginBottom: '16px' } },
         [
           { label: 'Sites', value: totals.count, color: '#0f172a' },
-          { label: 'Avg Total FTE', value: totals.avgFTE.toFixed(1), color: '#0f172a' },
-          { label: 'Flex Budget', value: totals.budget.toFixed(1), color: '#0f172a' },
-          { label: 'Variance', value: (portfolioVariance > 0 ? '+' : '') + portfolioVariance.toFixed(1) + '%', color: portfolioVariance > 5 ? '#dc2626' : portfolioVariance < -5 ? '#16a34a' : '#0f172a' },
+          { label: roleFilter !== 'all' ? 'Avg ' + roleFilter + ' FTE' : 'Avg Total FTE', value: totals.avgFTE.toFixed(1), color: '#0f172a' },
+          { label: 'Flex Budget', value: roleFilter !== 'all' ? '—' : totals.budget.toFixed(1), color: '#0f172a' },
+          { label: 'Variance', value: roleFilter !== 'all' ? '—' : (portfolioVariance > 0 ? '+' : '') + portfolioVariance.toFixed(1) + '%', color: roleFilter === 'all' && portfolioVariance > 5 ? '#dc2626' : roleFilter === 'all' && portfolioVariance < -5 ? '#16a34a' : '#0f172a' },
           { label: 'Productive %', value: productivePct.toFixed(0) + '%', color: '#0f172a' }
         ].map(function(kpi) {
           return React.createElement('div', { key: kpi.label, style: { background: 'white', padding: '10px 12px', borderRadius: '8px', boxShadow: '0 1px 2px rgba(0,0,0,0.05)' } },
@@ -69942,7 +69979,7 @@ var data = {
                 React.createElement('tr', null,
                   React.createElement('th', { onClick: function() { handleSort('name'); }, style: { minWidth: '200px' } }, 'Site', sortArrow('name')),
                   React.createElement('th', { onClick: function() { handleSort('modality'); }, style: { width: '70px' } }, 'Type', sortArrow('modality')),
-                  React.createElement('th', { onClick: function() { handleSort('fte'); }, style: { width: '180px' } }, 'Actual vs Flex', sortArrow('fte')),
+                  React.createElement('th', { onClick: function() { handleSort('fte'); }, style: { width: '180px' } }, roleFilter !== 'all' ? roleFilter + ' FTE' : 'Actual vs Flex', sortArrow('fte')),
                   React.createElement('th', { style: { width: '200px' } }, 'Roles (FYTD)'),
                   React.createElement('th', { style: { width: '110px' } }, 'Trend'),
                   React.createElement('th', { onClick: function() { handleSort('variance'); }, style: { width: '70px', textAlign: 'right' } }, 'Var %', sortArrow('variance')),
@@ -69951,14 +69988,22 @@ var data = {
               ),
               React.createElement('tbody', null,
                 sortedCCs.reduce(function(rows, cc) {
-                  var site = filteredSites[cc], avgFTE = getAvgFTE(site);
-                  var variance = site.budgetFTE > 0 ? ((avgFTE - site.budgetFTE) / site.budgetFTE * 100) : null;
+                  var site = filteredSites[cc];
+                  var roleMode = roleFilter !== 'all';
+                  var avgFTE = roleMode ? getRoleAvgFTE(site, roleFilter) : getAvgFTE(site);
+                  var variance = !roleMode && site.budgetFTE > 0 ? ((avgFTE - site.budgetFTE) / site.budgetFTE * 100) : null;
                   var isExpanded = selectedSite === cc;
                   var roleStr = [];
-                  ROLE_ORDER.forEach(function(r) { if (site.roles[r]) roleStr.push({ role: r, fte: site.roles[r].fytdFTE }); });
-                  Object.keys(site.roles).forEach(function(r) { if (ROLE_ORDER.indexOf(r) === -1) roleStr.push({ role: r, fte: site.roles[r].fytdFTE }); });
-                  roleStr.sort(function(a, b) { return b.fte - a.fte; });
-                  var sparkVals = site.totalFTE.periods.map(function(p) { return p.fte; });
+                  if (roleMode) {
+                    if (site.roles[roleFilter]) roleStr.push({ role: roleFilter, fte: site.roles[roleFilter].fytdFTE });
+                  } else {
+                    ROLE_ORDER.forEach(function(r) { if (site.roles[r]) roleStr.push({ role: r, fte: site.roles[r].fytdFTE }); });
+                    Object.keys(site.roles).forEach(function(r) { if (ROLE_ORDER.indexOf(r) === -1) roleStr.push({ role: r, fte: site.roles[r].fytdFTE }); });
+                    roleStr.sort(function(a, b) { return b.fte - a.fte; });
+                  }
+                  var sparkVals = roleMode && site.roles[roleFilter]
+                    ? site.roles[roleFilter].periods.map(function(p) { return p.fte; })
+                    : site.totalFTE.periods.map(function(p) { return p.fte; });
 
                   rows.push(React.createElement('tr', {
                     key: cc, className: isExpanded ? 'expanded' : '', onClick: function() { setSelectedSite(isExpanded ? null : cc); }, style: { cursor: 'pointer' }
@@ -69969,11 +70014,13 @@ var data = {
                     ),
                     React.createElement('td', { style: { fontSize: '11px', color: '#475569' } }, MODALITY_LABELS[site.modality] || site.modality),
                     React.createElement('td', null,
-                      React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: '8px' } },
-                        React.createElement('div', { style: { fontWeight: '700', fontSize: '13px', color: '#0f172a', width: '32px', textAlign: 'right', fontVariantNumeric: 'tabular-nums' } }, avgFTE.toFixed(1)),
-                        React.createElement(BulletGraph, { actual: avgFTE, target: site.budgetFTE }),
-                        React.createElement('div', { style: { fontSize: '10px', color: '#94a3b8', width: '28px', fontVariantNumeric: 'tabular-nums' } }, site.budgetFTE > 0 ? site.budgetFTE.toFixed(1) : '')
-                      )
+                      roleMode
+                        ? React.createElement('div', { style: { fontWeight: '700', fontSize: '13px', color: '#0f172a', fontVariantNumeric: 'tabular-nums' } }, avgFTE.toFixed(2))
+                        : React.createElement('div', { style: { display: 'flex', alignItems: 'center', gap: '8px' } },
+                            React.createElement('div', { style: { fontWeight: '700', fontSize: '13px', color: '#0f172a', width: '32px', textAlign: 'right', fontVariantNumeric: 'tabular-nums' } }, avgFTE.toFixed(1)),
+                            React.createElement(BulletGraph, { actual: avgFTE, target: site.budgetFTE }),
+                            React.createElement('div', { style: { fontSize: '10px', color: '#94a3b8', width: '28px', fontVariantNumeric: 'tabular-nums' } }, site.budgetFTE > 0 ? site.budgetFTE.toFixed(1) : '')
+                          )
                     ),
                     React.createElement('td', null,
                       React.createElement('div', { style: { display: 'flex', flexWrap: 'wrap', gap: '2px 8px' } },
@@ -69983,9 +70030,9 @@ var data = {
                         })
                       )
                     ),
-                    React.createElement('td', null, React.createElement(Sparkline, { values: sparkVals, width: 90, height: 20, budgetLine: site.budgetFTE > 0 ? site.budgetFTE : undefined })),
+                    React.createElement('td', null, React.createElement(Sparkline, { values: sparkVals, width: 90, height: 20, budgetLine: !roleMode && site.budgetFTE > 0 ? site.budgetFTE : undefined })),
                     React.createElement('td', { style: { textAlign: 'right', fontWeight: '600', fontSize: '12px', fontVariantNumeric: 'tabular-nums', color: variance === null ? '#94a3b8' : variance > 10 ? '#dc2626' : variance > 0 ? '#d97706' : '#16a34a' } },
-                      variance !== null ? (variance > 0 ? '+' : '') + variance.toFixed(0) + '%' : '--'),
+                      variance !== null ? (variance > 0 ? '+' : '') + variance.toFixed(0) + '%' : '—'),
                     React.createElement('td', { style: { fontSize: '11px', color: '#475569' } }, site.manager)
                   ));
                   if (isExpanded) rows.push(React.createElement(SiteDetail, { key: cc + '-detail', cc: cc }));
