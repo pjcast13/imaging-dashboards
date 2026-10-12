@@ -1,0 +1,3470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imaging Services Dashboard - FY27 PP02</title>
+    <script src="https://cdn.jsdelivr.net/npm/react@18/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.production.min.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; -webkit-font-smoothing: antialiased; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script>
+var App = (() => {
+  // ../../../private/tmp/app-full.jsx
+  var React = window.React;
+  var ReactDOM = window.ReactDOM;
+  var { useState, useMemo } = React;
+  var TrendingUp = ({ size = 24, ...props }) => /* @__PURE__ */ React.createElement("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props }, /* @__PURE__ */ React.createElement("polyline", { points: "23 6 13.5 15.5 8.5 10.5 1 18" }), /* @__PURE__ */ React.createElement("polyline", { points: "17 6 23 6 23 12" }));
+  var TrendingDown = ({ size = 24, ...props }) => /* @__PURE__ */ React.createElement("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props }, /* @__PURE__ */ React.createElement("polyline", { points: "23 18 13.5 8.5 8.5 13.5 1 6" }), /* @__PURE__ */ React.createElement("polyline", { points: "17 18 23 18 23 12" }));
+  var Minus = ({ size = 24, ...props }) => /* @__PURE__ */ React.createElement("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props }, /* @__PURE__ */ React.createElement("line", { x1: "5", y1: "12", x2: "19", y2: "12" }));
+  var AlertCircle = ({ size = 24, ...props }) => /* @__PURE__ */ React.createElement("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props }, /* @__PURE__ */ React.createElement("circle", { cx: "12", cy: "12", r: "10" }), /* @__PURE__ */ React.createElement("line", { x1: "12", y1: "8", x2: "12", y2: "12" }), /* @__PURE__ */ React.createElement("line", { x1: "12", y1: "16", x2: "12.01", y2: "16" }));
+  var CheckCircle = ({ size = 24, ...props }) => /* @__PURE__ */ React.createElement("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props }, /* @__PURE__ */ React.createElement("path", { d: "M22 11.08V12a10 10 0 1 1-5.93-9.14" }), /* @__PURE__ */ React.createElement("polyline", { points: "22 4 12 14.01 9 11.01" }));
+  var Eye = ({ size = 24, ...props }) => /* @__PURE__ */ React.createElement("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props }, /* @__PURE__ */ React.createElement("path", { d: "M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" }), /* @__PURE__ */ React.createElement("circle", { cx: "12", cy: "12", r: "3" }));
+  var Activity = ({ size = 24, ...props }) => /* @__PURE__ */ React.createElement("svg", { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: "2", strokeLinecap: "round", strokeLinejoin: "round", ...props }, /* @__PURE__ */ React.createElement("polyline", { points: "22 12 18 12 15 21 9 3 6 12 2 12" }));
+var data = {
+  "xray": [
+    {
+      "costCenter": "107183003",
+      "manager": "Steph",
+      "site": "Satellite Imaging EHC",
+      "location": "Emeryville",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 1.564625,
+          "targetProdFTE": 1.196047,
+          "actualTotalFTE": 1.564625,
+          "targetTotalFTE": 1.196047,
+          "actualUOS": 252.0,
+          "budgetUOS": 224.7583
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.5985,
+          "targetProdFTE": 1.148579,
+          "actualTotalFTE": 1.5985,
+          "targetTotalFTE": 1.148579,
+          "actualUOS": 242.0,
+          "budgetUOS": 224.7595
+        }
+      ],
+      "ytd": {
+        "actualUOS": 494.0,
+        "budgetUOS": 449.5178
+      }
+    },
+    {
+      "costCenter": "107183005",
+      "manager": "Marilyn",
+      "site": "Satellite Imaging Los Gatos",
+      "location": "Los Gatos",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 1.5015,
+          "targetProdFTE": 1.50853,
+          "actualTotalFTE": 2.1015,
+          "targetTotalFTE": 1.789393,
+          "actualUOS": 260.0,
+          "budgetUOS": 259.56
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.34325,
+          "targetProdFTE": 1.444709,
+          "actualTotalFTE": 1.586875,
+          "targetTotalFTE": 1.71369,
+          "actualUOS": 249.0,
+          "budgetUOS": 259.5596
+        }
+      ],
+      "ytd": {
+        "actualUOS": 509.0,
+        "budgetUOS": 519.1196
+      }
+    },
+    {
+      "costCenter": "107184007",
+      "manager": "Steph",
+      "site": "TV Clinic Imaging Pleasanton",
+      "location": "Pleasanton",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 2.240875,
+          "targetProdFTE": 3.398687,
+          "actualTotalFTE": 2.787125,
+          "targetTotalFTE": 4.148785,
+          "actualUOS": 534.0,
+          "budgetUOS": 346.325
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 2.53775,
+          "targetProdFTE": 3.653252,
+          "actualTotalFTE": 2.752375,
+          "targetTotalFTE": 4.459533,
+          "actualUOS": 574.0,
+          "budgetUOS": 346.3267
+        }
+      ],
+      "ytd": {
+        "actualUOS": 1108.0,
+        "budgetUOS": 692.6517
+      }
+    },
+    {
+      "costCenter": "107630002",
+      "manager": "Marilyn",
+      "site": "Diag Rad Imagaing Ctr Arrillaga",
+      "location": "Main Campus",
+      "modality": "xray",
+      "isFTEOnly": true,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.44825,
+          "targetProdFTE": 0.459584,
+          "actualTotalFTE": 0.44825,
+          "targetTotalFTE": 0.459584
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.594,
+          "targetProdFTE": 0.459584,
+          "actualTotalFTE": 0.594,
+          "targetTotalFTE": 0.459584
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    },
+    {
+      "costCenter": "107630005",
+      "manager": "Marilyn",
+      "site": "Diag Rad Gen Radiology Santa Clara",
+      "location": "Santa Clara",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.04375,
+          "targetProdFTE": 0.0,
+          "actualTotalFTE": 0.04375,
+          "targetTotalFTE": 0.0,
+          "actualUOS": 0.0,
+          "budgetUOS": 11.3549
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.200125,
+          "targetProdFTE": 0.34023,
+          "actualTotalFTE": 0.200125,
+          "targetTotalFTE": 0.34023,
+          "actualUOS": 22.0,
+          "budgetUOS": 11.3549
+        }
+      ],
+      "ytd": {
+        "actualUOS": 22.0,
+        "budgetUOS": 22.7098
+      }
+    },
+    {
+      "costCenter": "107630006",
+      "manager": "Teddy",
+      "site": "Diag Rad Blake Wilbur",
+      "location": "Blake Wilbur",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.0,
+          "targetProdFTE": 0.0,
+          "actualTotalFTE": 0.0,
+          "targetTotalFTE": 0.0,
+          "actualUOS": 0.0,
+          "budgetUOS": 88.13
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.0,
+          "targetProdFTE": 0.00844,
+          "actualTotalFTE": 0.0,
+          "targetTotalFTE": 0.00844,
+          "actualUOS": 1.0,
+          "budgetUOS": 88.1317
+        }
+      ],
+      "ytd": {
+        "actualUOS": 1.0,
+        "budgetUOS": 176.2617
+      }
+    },
+    {
+      "costCenter": "107630007",
+      "manager": "Steph",
+      "site": "Diag Rad EHC",
+      "location": "Emeryville",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 2.57575,
+          "targetProdFTE": 2.781299,
+          "actualTotalFTE": 3.37575,
+          "targetTotalFTE": 3.282787,
+          "actualUOS": 331.0,
+          "budgetUOS": 305.0717
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 2.684875,
+          "targetProdFTE": 2.789737,
+          "actualTotalFTE": 3.209875,
+          "targetTotalFTE": 3.292747,
+          "actualUOS": 332.0,
+          "budgetUOS": 305.0678
+        }
+      ],
+      "ytd": {
+        "actualUOS": 663.0,
+        "budgetUOS": 610.1395
+      }
+    },
+    {
+      "costCenter": "107630008",
+      "manager": "Teddy",
+      "site": "Diag Rad Hoover",
+      "location": "Hoover",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 2.336875,
+          "targetProdFTE": 2.396292,
+          "actualTotalFTE": 2.436875,
+          "targetTotalFTE": 3.081686,
+          "actualUOS": 499.0,
+          "budgetUOS": 496.7083
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 2.59625,
+          "targetProdFTE": 2.727633,
+          "actualTotalFTE": 2.79625,
+          "targetTotalFTE": 3.507798,
+          "actualUOS": 568.0,
+          "budgetUOS": 496.7101
+        }
+      ],
+      "ytd": {
+        "actualUOS": 1067.0,
+        "budgetUOS": 993.4184
+      }
+    },
+    {
+      "costCenter": "107630010",
+      "manager": "Teddy",
+      "site": "Diag Rad SNHC",
+      "location": "SNHC",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 1.588,
+          "targetProdFTE": 1.278458,
+          "actualTotalFTE": 1.825375,
+          "targetTotalFTE": 1.549559,
+          "actualUOS": 114.0,
+          "budgetUOS": 126.6183
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.484125,
+          "targetProdFTE": 1.222405,
+          "actualTotalFTE": 1.81025,
+          "targetTotalFTE": 1.48162,
+          "actualUOS": 109.0,
+          "budgetUOS": 126.6162
+        }
+      ],
+      "ytd": {
+        "actualUOS": 223.0,
+        "budgetUOS": 253.2345
+      }
+    },
+    {
+      "costCenter": "107630011",
+      "manager": "Marilyn",
+      "site": "Diag Rad SBCC",
+      "location": "South Bay",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 1.540375,
+          "targetProdFTE": 1.353169,
+          "actualTotalFTE": 1.840375,
+          "targetTotalFTE": 2.186109,
+          "actualUOS": 281.0,
+          "budgetUOS": 306.285
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.505875,
+          "targetProdFTE": 1.743197,
+          "actualTotalFTE": 2.537,
+          "targetTotalFTE": 2.816217,
+          "actualUOS": 362.0,
+          "budgetUOS": 306.2905
+        }
+      ],
+      "ytd": {
+        "actualUOS": 643.0,
+        "budgetUOS": 612.5755
+      }
+    },
+    {
+      "costCenter": "107630014",
+      "manager": "Teddy",
+      "site": "Diag Rad Multi Site",
+      "location": "Main Campus",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 50.893,
+          "targetProdFTE": 43.446737,
+          "actualTotalFTE": 59.558625,
+          "targetTotalFTE": 49.99853,
+          "actualUOS": 6893.0,
+          "budgetUOS": 7032.4333
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 54.133125,
+          "targetProdFTE": 44.61616,
+          "actualTotalFTE": 62.922625,
+          "targetTotalFTE": 51.343337,
+          "actualUOS": 7094.0,
+          "budgetUOS": 7032.4306
+        }
+      ],
+      "ytd": {
+        "actualUOS": 13987.0,
+        "budgetUOS": 14064.8639
+      }
+    },
+    {
+      "costCenter": "107630019",
+      "manager": "Marilyn",
+      "site": "Diag Rad OPC",
+      "location": "Redwood City",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 18.455,
+          "targetProdFTE": 17.806583,
+          "actualTotalFTE": 22.770875,
+          "targetTotalFTE": 20.508785,
+          "actualUOS": 2215.0,
+          "budgetUOS": 2070.1917
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 20.123375,
+          "targetProdFTE": 17.766416,
+          "actualTotalFTE": 21.8185,
+          "targetTotalFTE": 20.462523,
+          "actualUOS": 2210.0,
+          "budgetUOS": 2070.1886
+        }
+      ],
+      "ytd": {
+        "actualUOS": 4425.0,
+        "budgetUOS": 4140.3803
+      }
+    },
+    {
+      "costCenter": "107630026",
+      "manager": "Marilyn",
+      "site": "Diag Rad South Bay 2585",
+      "location": "South Bay",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.21725,
+          "targetProdFTE": 0.15781,
+          "actualTotalFTE": 0.21725,
+          "targetTotalFTE": 0.15781,
+          "actualUOS": 5.0,
+          "budgetUOS": 10.1791
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.383125,
+          "targetProdFTE": 0.347182,
+          "actualTotalFTE": 0.383125,
+          "targetTotalFTE": 0.347182,
+          "actualUOS": 11.0,
+          "budgetUOS": 10.1791
+        }
+      ],
+      "ytd": {
+        "actualUOS": 16.0,
+        "budgetUOS": 20.3582
+      }
+    },
+    {
+      "costCenter": "107630033",
+      "manager": "Teddy",
+      "site": "Diag Rad OR",
+      "location": "Main Campus",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": true,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 9.291875,
+          "targetProdFTE": 12.283148,
+          "actualTotalFTE": 11.420375,
+          "targetTotalFTE": 13.871921,
+          "actualUOS": 1053.0,
+          "budgetUOS": 932.995
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 8.284875,
+          "targetProdFTE": 14.07962,
+          "actualTotalFTE": 9.60975,
+          "targetTotalFTE": 15.900759,
+          "actualUOS": 1207.0,
+          "budgetUOS": 932.99
+        }
+      ],
+      "ytd": {
+        "actualUOS": 2260.0,
+        "budgetUOS": 1865.985
+      }
+    },
+    {
+      "costCenter": "107680004",
+      "manager": "Teddy",
+      "site": "CT Scan Gen Radiology 801 Welch",
+      "location": "Main Campus",
+      "modality": "xray",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.05,
+          "targetProdFTE": 0.056715,
+          "actualTotalFTE": 0.05,
+          "targetTotalFTE": 0.056715,
+          "actualUOS": 25.0,
+          "budgetUOS": 19.7867
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.008375,
+          "targetProdFTE": 0.045377,
+          "actualTotalFTE": 0.008375,
+          "targetTotalFTE": 0.045377,
+          "actualUOS": 20.0,
+          "budgetUOS": 19.7846
+        }
+      ],
+      "ytd": {
+        "actualUOS": 45.0,
+        "budgetUOS": 39.5713
+      }
+    }
+  ],
+  "admin": [
+    {
+      "costCenter": "107183006",
+      "manager": "Judy",
+      "site": "Satellite Imaging Mktg",
+      "location": "Main Campus",
+      "modality": "admin",
+      "isFTEOnly": true,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 1.1,
+          "targetProdFTE": 1.571355,
+          "actualTotalFTE": 2.0,
+          "targetTotalFTE": 2.000004
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.7,
+          "targetProdFTE": 1.571355,
+          "actualTotalFTE": 2.0,
+          "targetTotalFTE": 2.000004
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    },
+    {
+      "costCenter": "107630003",
+      "manager": "Judy",
+      "site": "Diag Rad Imaging Svcs - CSI",
+      "location": "Main Campus",
+      "modality": "admin",
+      "isFTEOnly": true,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 4.087125,
+          "targetProdFTE": 4.220081,
+          "actualTotalFTE": 4.587125,
+          "targetTotalFTE": 5.000008
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 4.30425,
+          "targetProdFTE": 4.220081,
+          "actualTotalFTE": 4.90425,
+          "targetTotalFTE": 5.000008
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    },
+    {
+      "costCenter": "107630012",
+      "manager": "Christa",
+      "site": "Diag Rad Imaging Svcs - Nurses 800P",
+      "location": "Main Campus",
+      "modality": "admin",
+      "isFTEOnly": true,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 3.919375,
+          "targetProdFTE": 2.85238,
+          "actualTotalFTE": 12.09525,
+          "targetTotalFTE": 11.553709
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 4.31675,
+          "targetProdFTE": 2.85238,
+          "actualTotalFTE": 11.344125,
+          "targetTotalFTE": 11.553709
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    },
+    {
+      "costCenter": "107630013",
+      "manager": "Shantika",
+      "site": "Diag Rad Imaging Svcs Ctr 800P",
+      "location": "Main Campus",
+      "modality": "admin",
+      "isFTEOnly": true,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 25.083625,
+          "targetProdFTE": 27.237935,
+          "actualTotalFTE": 30.998625,
+          "targetTotalFTE": 32.017105
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 26.571875,
+          "targetProdFTE": 27.237935,
+          "actualTotalFTE": 30.86025,
+          "targetTotalFTE": 32.017105
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    },
+    {
+      "costCenter": "107630021",
+      "manager": "Judy",
+      "site": "Diag Rad Quality Improvement 300P",
+      "location": "Main Campus",
+      "modality": "admin",
+      "isFTEOnly": true,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.7,
+          "targetProdFTE": 0.69101,
+          "actualTotalFTE": 1.0,
+          "targetTotalFTE": 1.000001
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.0,
+          "targetProdFTE": 0.69101,
+          "actualTotalFTE": 1.0,
+          "targetTotalFTE": 1.000001
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    },
+    {
+      "costCenter": "107630028",
+      "manager": "Judy",
+      "site": "Imaging Admin EHC",
+      "location": "Emeryville",
+      "modality": "admin",
+      "isFTEOnly": true,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.7,
+          "targetProdFTE": 0.891184,
+          "actualTotalFTE": 1.0,
+          "targetTotalFTE": 1.000003
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.6,
+          "targetProdFTE": 0.891184,
+          "actualTotalFTE": 1.0,
+          "targetTotalFTE": 1.000003
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    },
+    {
+      "costCenter": "107630031",
+      "manager": "Judy",
+      "site": "Imaging Admin Multi Site",
+      "location": "Main Campus",
+      "modality": "admin",
+      "isFTEOnly": true,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 13.93175,
+          "targetProdFTE": 14.033874,
+          "actualTotalFTE": 17.13175,
+          "targetTotalFTE": 15.996779
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 14.155,
+          "targetProdFTE": 14.033874,
+          "actualTotalFTE": 16.129875,
+          "targetTotalFTE": 15.996779
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    },
+    {
+      "costCenter": "107630032",
+      "manager": "Judy",
+      "site": "Imaging Admin OPC",
+      "location": "Redwood City",
+      "modality": "admin",
+      "isFTEOnly": true,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.9,
+          "targetProdFTE": 0.921968,
+          "actualTotalFTE": 1.0,
+          "targetTotalFTE": 1.000002
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.0,
+          "targetProdFTE": 0.921968,
+          "actualTotalFTE": 1.0,
+          "targetTotalFTE": 1.000002
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    }
+  ],
+  "nuclearMedicine": [
+    {
+      "costCenter": "107183015",
+      "manager": "Tina",
+      "site": "Satellite PET CT EHC",
+      "location": "EHC-6121",
+      "modality": "nuclearMedicine",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 1.2455,
+          "targetProdFTE": 1.287538,
+          "actualTotalFTE": 2.170875,
+          "targetTotalFTE": 1.288384,
+          "actualUOS": 84.0,
+          "budgetUOS": 74.2418
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.365,
+          "targetProdFTE": 1.471471,
+          "actualTotalFTE": 2.4035,
+          "targetTotalFTE": 1.472438,
+          "actualUOS": 96.0,
+          "budgetUOS": 74.2418
+        }
+      ],
+      "ytd": {
+        "actualUOS": 180.0,
+        "budgetUOS": 148.4836
+      }
+    },
+    {
+      "costCenter": "107650001",
+      "manager": "Tina",
+      "site": "Nuclear Med EHC",
+      "location": "Emeryville",
+      "modality": "nuclearMedicine",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 1.37275,
+          "targetProdFTE": 0.891131,
+          "actualTotalFTE": 1.37275,
+          "targetTotalFTE": 0.892508,
+          "actualUOS": 28.0,
+          "budgetUOS": 39.3349
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.3515,
+          "targetProdFTE": 1.113917,
+          "actualTotalFTE": 1.3515,
+          "targetTotalFTE": 1.115639,
+          "actualUOS": 35.0,
+          "budgetUOS": 39.3349
+        }
+      ],
+      "ytd": {
+        "actualUOS": 63.0,
+        "budgetUOS": 78.6698
+      }
+    },
+    {
+      "costCenter": "107650002",
+      "manager": "Tina",
+      "site": "Nuclear Med Multi Site",
+      "location": "Main Campus",
+      "modality": "nuclearMedicine",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 22.188,
+          "targetProdFTE": 15.363459,
+          "actualTotalFTE": 24.2105,
+          "targetTotalFTE": 17.287197,
+          "actualUOS": 717.0,
+          "budgetUOS": 545.8833
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 23.601375,
+          "targetProdFTE": 16.338037,
+          "actualTotalFTE": 25.03025,
+          "targetTotalFTE": 18.376047,
+          "actualUOS": 768.0,
+          "budgetUOS": 545.8797
+        }
+      ],
+      "ytd": {
+        "actualUOS": 1485.0,
+        "budgetUOS": 1091.763
+      }
+    },
+    {
+      "costCenter": "107650004",
+      "manager": "Tina",
+      "site": "Nuclear Med SBCC",
+      "location": "South Bay",
+      "modality": "nuclearMedicine",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 3.277875,
+          "targetProdFTE": 3.255944,
+          "actualTotalFTE": 3.947875,
+          "targetTotalFTE": 3.348479,
+          "actualUOS": 139.0,
+          "budgetUOS": 55.5637
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 2.590625,
+          "targetProdFTE": 3.068552,
+          "actualTotalFTE": 3.438375,
+          "targetTotalFTE": 3.155762,
+          "actualUOS": 131.0,
+          "budgetUOS": 55.5637
+        }
+      ],
+      "ytd": {
+        "actualUOS": 270.0,
+        "budgetUOS": 111.1274
+      }
+    },
+    {
+      "costCenter": "107650006",
+      "manager": "Tina",
+      "site": "Nuclear Med Theragnostic",
+      "location": "Main Campus",
+      "modality": "nuclearMedicine",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 3.7725,
+          "targetProdFTE": 2.881488,
+          "actualTotalFTE": 4.664375,
+          "targetTotalFTE": 3.498044,
+          "actualUOS": 31.0,
+          "budgetUOS": 32.9507
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 3.901125,
+          "targetProdFTE": 2.602635,
+          "actualTotalFTE": 4.306,
+          "targetTotalFTE": 3.159524,
+          "actualUOS": 28.0,
+          "budgetUOS": 32.9507
+        }
+      ],
+      "ytd": {
+        "actualUOS": 59.0,
+        "budgetUOS": 65.9014
+      }
+    }
+  ],
+  "mri": [
+    {
+      "costCenter": "107183016",
+      "manager": "Steph",
+      "site": "Satellite MRI EHC",
+      "location": "EHC-6121",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 3.506875,
+          "targetProdFTE": 4.045096,
+          "actualTotalFTE": 4.176875,
+          "targetTotalFTE": 4.272,
+          "actualUOS": 240.0,
+          "budgetUOS": 168.0
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 3.89475,
+          "targetProdFTE": 4.719311,
+          "actualTotalFTE": 4.28425,
+          "targetTotalFTE": 4.984034,
+          "actualUOS": 280.0,
+          "budgetUOS": 167.9988
+        }
+      ],
+      "ytd": {
+        "actualUOS": 520.0,
+        "budgetUOS": 335.9988
+      }
+    },
+    {
+      "costCenter": "107660001",
+      "manager": "Teresa",
+      "site": "MRI Blake Wilbur",
+      "location": "Blake Wilbur",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 11.21575,
+          "targetProdFTE": 10.036502,
+          "actualTotalFTE": 12.092,
+          "targetTotalFTE": 10.490086,
+          "actualUOS": 427.0,
+          "budgetUOS": 418.4017
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 11.078,
+          "targetProdFTE": 10.976761,
+          "actualTotalFTE": 11.808625,
+          "targetTotalFTE": 11.472839,
+          "actualUOS": 467.0,
+          "budgetUOS": 418.3989
+        }
+      ],
+      "ytd": {
+        "actualUOS": 894.0,
+        "budgetUOS": 836.8006
+      }
+    },
+    {
+      "costCenter": "107660002",
+      "manager": "Teresa",
+      "site": "MRI SBCC",
+      "location": "South Bay",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 4.836375,
+          "targetProdFTE": 5.384743,
+          "actualTotalFTE": 5.736375,
+          "targetTotalFTE": 5.505371,
+          "actualUOS": 235.0,
+          "budgetUOS": 223.8833
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 5.417875,
+          "targetProdFTE": 6.140782,
+          "actualTotalFTE": 5.42475,
+          "targetTotalFTE": 6.278346,
+          "actualUOS": 268.0,
+          "budgetUOS": 223.8875
+        }
+      ],
+      "ytd": {
+        "actualUOS": 503.0,
+        "budgetUOS": 447.7708
+      }
+    },
+    {
+      "costCenter": "107660003",
+      "manager": "Steph",
+      "site": "MRI EHC",
+      "location": "Emeryville",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 2.03125,
+          "targetProdFTE": 2.271457,
+          "actualTotalFTE": 2.22325,
+          "targetTotalFTE": 2.58499,
+          "actualUOS": 86.0,
+          "budgetUOS": 85.82
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.6475,
+          "targetProdFTE": 2.456328,
+          "actualTotalFTE": 1.835625,
+          "targetTotalFTE": 2.79538,
+          "actualUOS": 93.0,
+          "budgetUOS": 85.8205
+        }
+      ],
+      "ytd": {
+        "actualUOS": 179.0,
+        "budgetUOS": 171.6405
+      }
+    },
+    {
+      "costCenter": "107660005",
+      "manager": "Teresa",
+      "site": "MRI 800P",
+      "location": "Main Campus",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 35.12175,
+          "targetProdFTE": 32.048188,
+          "actualTotalFTE": 40.0985,
+          "targetTotalFTE": 36.815822,
+          "actualUOS": 1100.0,
+          "budgetUOS": 967.5867
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 35.3895,
+          "targetProdFTE": 32.90907,
+          "actualTotalFTE": 40.3655,
+          "targetTotalFTE": 37.804259,
+          "actualUOS": 1133.0,
+          "budgetUOS": 967.5826
+        }
+      ],
+      "ytd": {
+        "actualUOS": 2233.0,
+        "budgetUOS": 1935.1693
+      }
+    },
+    {
+      "costCenter": "107660006",
+      "manager": "Teresa",
+      "site": "MRI Min Invasive",
+      "location": "Main Campus",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 6.697875,
+          "targetProdFTE": 1.710155,
+          "actualTotalFTE": 7.189,
+          "targetTotalFTE": 1.891597,
+          "actualUOS": 13.0,
+          "budgetUOS": 50.3656
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 7.116625,
+          "targetProdFTE": 2.104802,
+          "actualTotalFTE": 7.266625,
+          "targetTotalFTE": 2.328116,
+          "actualUOS": 16.0,
+          "budgetUOS": 50.3656
+        }
+      ],
+      "ytd": {
+        "actualUOS": 29.0,
+        "budgetUOS": 100.7312
+      }
+    },
+    {
+      "costCenter": "107660007",
+      "manager": "Teresa",
+      "site": "MRI Imaging OPC",
+      "location": "Redwood City",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 16.226375,
+          "targetProdFTE": 15.743868,
+          "actualTotalFTE": 19.11425,
+          "targetTotalFTE": 17.526751,
+          "actualUOS": 755.0,
+          "budgetUOS": 779.6367
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 16.8465,
+          "targetProdFTE": 17.286924,
+          "actualTotalFTE": 17.998,
+          "targetTotalFTE": 19.244548,
+          "actualUOS": 829.0,
+          "budgetUOS": 779.639
+        }
+      ],
+      "ytd": {
+        "actualUOS": 1584.0,
+        "budgetUOS": 1559.2757
+      }
+    },
+    {
+      "costCenter": "107660009",
+      "manager": "Teresa",
+      "site": "MRI Imaging Ctr Palo Alto Sherman",
+      "location": "Sherman",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 10.30875,
+          "targetProdFTE": 11.135818,
+          "actualTotalFTE": 10.65375,
+          "targetTotalFTE": 11.228709,
+          "actualUOS": 536.0,
+          "budgetUOS": 532.5483
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 11.012,
+          "targetProdFTE": 11.717448,
+          "actualTotalFTE": 11.17425,
+          "targetTotalFTE": 11.81519,
+          "actualUOS": 564.0,
+          "budgetUOS": 532.5526
+        }
+      ],
+      "ytd": {
+        "actualUOS": 1100.0,
+        "budgetUOS": 1065.1009
+      }
+    },
+    {
+      "costCenter": "107660010",
+      "manager": "Teresa",
+      "site": "MRI PET SNHC",
+      "location": "SNHC",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 2.907,
+          "targetProdFTE": 3.765741,
+          "actualTotalFTE": 3.057,
+          "targetTotalFTE": 4.005533,
+          "actualUOS": 221.0,
+          "budgetUOS": 221.97
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 3.500125,
+          "targetProdFTE": 4.004193,
+          "actualTotalFTE": 3.500125,
+          "targetTotalFTE": 4.259169,
+          "actualUOS": 235.0,
+          "budgetUOS": 221.9757
+        }
+      ],
+      "ytd": {
+        "actualUOS": 456.0,
+        "budgetUOS": 443.9457
+      }
+    },
+    {
+      "costCenter": "107660011",
+      "manager": "Teresa",
+      "site": "MRI SNHC",
+      "location": "SNHC",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 6.865,
+          "targetProdFTE": 6.780978,
+          "actualTotalFTE": 7.536625,
+          "targetTotalFTE": 7.109628,
+          "actualUOS": 242.0,
+          "budgetUOS": 242.3923
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 7.0715,
+          "targetProdFTE": 7.313371,
+          "actualTotalFTE": 7.1895,
+          "targetTotalFTE": 7.667826,
+          "actualUOS": 261.0,
+          "budgetUOS": 242.3923
+        }
+      ],
+      "ytd": {
+        "actualUOS": 503.0,
+        "budgetUOS": 484.7846
+      }
+    },
+    {
+      "costCenter": "107660012",
+      "manager": "Teresa",
+      "site": "MRI BW Cancer Ctr",
+      "location": "AMC",
+      "modality": "mri",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 5.243625,
+          "targetProdFTE": 5.055597,
+          "actualTotalFTE": 5.71775,
+          "targetTotalFTE": 5.644109,
+          "actualUOS": 142.0,
+          "budgetUOS": 144.2896
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 5.9665,
+          "targetProdFTE": 5.945667,
+          "actualTotalFTE": 6.377625,
+          "targetTotalFTE": 6.63779,
+          "actualUOS": 167.0,
+          "budgetUOS": 144.2896
+        }
+      ],
+      "ytd": {
+        "actualUOS": 309.0,
+        "budgetUOS": 288.5792
+      }
+    }
+  ],
+  "ultrasound": [
+    {
+      "costCenter": "107183017",
+      "manager": "Krystal",
+      "site": "Satellite Ultrasound EHC",
+      "location": "EHC-6121",
+      "modality": "ultrasound",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.823625,
+          "targetProdFTE": 1.001357,
+          "actualTotalFTE": 0.823625,
+          "targetTotalFTE": 1.001357,
+          "actualUOS": 103.0,
+          "budgetUOS": 122.7683
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.234375,
+          "targetProdFTE": 1.224916,
+          "actualTotalFTE": 1.234375,
+          "targetTotalFTE": 1.224916,
+          "actualUOS": 126.0,
+          "budgetUOS": 122.7728
+        }
+      ],
+      "ytd": {
+        "actualUOS": 229.0,
+        "budgetUOS": 245.5411
+      }
+    },
+    {
+      "costCenter": "107183029",
+      "manager": "Krystal",
+      "site": "Satellite Ultrasound St Rose SNF",
+      "location": "St Rose",
+      "modality": "ultrasound",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.0,
+          "targetProdFTE": 0.0,
+          "actualTotalFTE": 0.0,
+          "targetTotalFTE": 0.0,
+          "actualUOS": 0.0,
+          "budgetUOS": 120.7617
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.0,
+          "targetProdFTE": 0.0,
+          "actualTotalFTE": 0.0,
+          "targetTotalFTE": 0.0,
+          "actualUOS": 0.0,
+          "budgetUOS": 120.76
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0.0,
+        "budgetUOS": 241.5217
+      }
+    },
+    {
+      "costCenter": "107670001",
+      "manager": "Krystal",
+      "site": "Ultrasound Blake Wilbur",
+      "location": "Blake Wilbur",
+      "modality": "ultrasound",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 3.373125,
+          "targetProdFTE": 3.364094,
+          "actualTotalFTE": 3.498125,
+          "targetTotalFTE": 3.602669,
+          "actualUOS": 383.0,
+          "budgetUOS": 339.4417
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 3.23825,
+          "targetProdFTE": 3.425585,
+          "actualTotalFTE": 3.23825,
+          "targetTotalFTE": 3.66852,
+          "actualUOS": 390.0,
+          "budgetUOS": 339.4411
+        }
+      ],
+      "ytd": {
+        "actualUOS": 773.0,
+        "budgetUOS": 678.8828
+      }
+    },
+    {
+      "costCenter": "107670002",
+      "manager": "Krystal",
+      "site": "Ultrasound SBCC",
+      "location": "South Bay",
+      "modality": "ultrasound",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 3.601125,
+          "targetProdFTE": 3.634067,
+          "actualTotalFTE": 3.718625,
+          "targetTotalFTE": 3.912104,
+          "actualUOS": 401.0,
+          "budgetUOS": 391.8017
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 3.75325,
+          "targetProdFTE": 3.88776,
+          "actualTotalFTE": 3.75325,
+          "targetTotalFTE": 4.185208,
+          "actualUOS": 429.0,
+          "budgetUOS": 391.8074
+        }
+      ],
+      "ytd": {
+        "actualUOS": 830.0,
+        "budgetUOS": 783.6091
+      }
+    },
+    {
+      "costCenter": "107670003",
+      "manager": "Krystal",
+      "site": "Ultrasound BW Cancer Ctr",
+      "location": "AMC",
+      "modality": "ultrasound",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 3.207,
+          "targetProdFTE": 3.334779,
+          "actualTotalFTE": 3.952,
+          "targetTotalFTE": 3.78262,
+          "actualUOS": 303.0,
+          "budgetUOS": 286.3933
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 2.9335,
+          "targetProdFTE": 3.048609,
+          "actualTotalFTE": 3.31575,
+          "targetTotalFTE": 3.458019,
+          "actualUOS": 277.0,
+          "budgetUOS": 286.3949
+        }
+      ],
+      "ytd": {
+        "actualUOS": 580.0,
+        "budgetUOS": 572.7882
+      }
+    },
+    {
+      "costCenter": "107670004",
+      "manager": "Krystal",
+      "site": "Ultrasound EHC",
+      "location": "Emeryville",
+      "modality": "ultrasound",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 1.201,
+          "targetProdFTE": 1.122769,
+          "actualTotalFTE": 1.201,
+          "targetTotalFTE": 1.122769,
+          "actualUOS": 117.0,
+          "budgetUOS": 167.5333
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.107625,
+          "targetProdFTE": 0.998041,
+          "actualTotalFTE": 1.107625,
+          "targetTotalFTE": 0.998041,
+          "actualUOS": 104.0,
+          "budgetUOS": 167.5291
+        }
+      ],
+      "ytd": {
+        "actualUOS": 221.0,
+        "budgetUOS": 335.0624
+      }
+    },
+    {
+      "costCenter": "107670005",
+      "manager": "Krystal",
+      "site": "Ultrasound 800P",
+      "location": "Main Campus",
+      "modality": "ultrasound",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 21.025375,
+          "targetProdFTE": 20.134421,
+          "actualTotalFTE": 25.2315,
+          "targetTotalFTE": 24.398828,
+          "actualUOS": 1518.0,
+          "budgetUOS": 1326.9317
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 24.47425,
+          "targetProdFTE": 20.048786,
+          "actualTotalFTE": 26.711375,
+          "targetTotalFTE": 24.295749,
+          "actualUOS": 1511.0,
+          "budgetUOS": 1326.93
+        }
+      ],
+      "ytd": {
+        "actualUOS": 3029.0,
+        "budgetUOS": 2653.8617
+      }
+    },
+    {
+      "costCenter": "107670006",
+      "manager": "Krystal",
+      "site": "Ultrasound OPC",
+      "location": "Redwood City",
+      "modality": "ultrasound",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 3.06425,
+          "targetProdFTE": 3.534985,
+          "actualTotalFTE": 3.16425,
+          "targetTotalFTE": 4.151931,
+          "actualUOS": 369.0,
+          "budgetUOS": 321.2183
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 2.01675,
+          "targetProdFTE": 2.280006,
+          "actualTotalFTE": 2.01675,
+          "targetTotalFTE": 2.677925,
+          "actualUOS": 238.0,
+          "budgetUOS": 321.2201
+        }
+      ],
+      "ytd": {
+        "actualUOS": 607.0,
+        "budgetUOS": 642.4384
+      }
+    },
+    {
+      "costCenter": "107670007",
+      "manager": "Judy",
+      "site": "Ultrasound Point of Care",
+      "location": "Main Campus",
+      "modality": "ultrasound",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.3,
+          "targetProdFTE": 1.662908,
+          "actualTotalFTE": 1.0,
+          "targetTotalFTE": 1.785822,
+          "actualUOS": 0,
+          "budgetUOS": 0
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.8,
+          "targetProdFTE": 1.662908,
+          "actualTotalFTE": 1.0,
+          "targetTotalFTE": 1.785822,
+          "actualUOS": 0,
+          "budgetUOS": 0
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    },
+    {
+      "costCenter": "107670008",
+      "manager": "Krystal",
+      "site": "Ultrasound SNHC",
+      "location": "SNHC",
+      "modality": "ultrasound",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.817875,
+          "targetProdFTE": 0.887073,
+          "actualTotalFTE": 0.92225,
+          "targetTotalFTE": 0.967642,
+          "actualUOS": 95.0,
+          "budgetUOS": 60.1582
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.5755,
+          "targetProdFTE": 0.644296,
+          "actualTotalFTE": 0.8755,
+          "targetTotalFTE": 0.702815,
+          "actualUOS": 69.0,
+          "budgetUOS": 60.1582
+        }
+      ],
+      "ytd": {
+        "actualUOS": 164.0,
+        "budgetUOS": 120.3164
+      }
+    },
+    {
+      "costCenter": "107670009",
+      "manager": "Krystal",
+      "site": "Ultrasound OPC PAVE",
+      "location": "Redwood City",
+      "modality": "ultrasound",
+      "isFTEOnly": true,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.0,
+          "targetProdFTE": 0.0,
+          "actualTotalFTE": 0.0,
+          "targetTotalFTE": 0.0
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.04375,
+          "targetProdFTE": 0.0,
+          "actualTotalFTE": 0.04375,
+          "targetTotalFTE": 0.0
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    }
+  ],
+  "ct": [
+    {
+      "costCenter": "107183018",
+      "manager": "Monglan",
+      "site": "Satellite CT Scan EHC",
+      "location": "EHC-6121",
+      "modality": "ct",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 2.01675,
+          "targetProdFTE": 2.322781,
+          "actualTotalFTE": 2.01675,
+          "targetTotalFTE": 2.402482,
+          "actualUOS": 203.0,
+          "budgetUOS": 152.4367
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 2.177125,
+          "targetProdFTE": 2.734679,
+          "actualTotalFTE": 2.177125,
+          "targetTotalFTE": 2.828513,
+          "actualUOS": 239.0,
+          "budgetUOS": 152.438
+        }
+      ],
+      "ytd": {
+        "actualUOS": 442.0,
+        "budgetUOS": 304.8747
+      }
+    },
+    {
+      "costCenter": "107680001",
+      "manager": "Christoph",
+      "site": "3DQ Lab",
+      "location": "CLARK",
+      "modality": "ct",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 21.3065,
+          "targetProdFTE": 26.644781,
+          "actualTotalFTE": 22.631,
+          "targetTotalFTE": 31.000048,
+          "actualUOS": 0,
+          "budgetUOS": 0
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 24.119125,
+          "targetProdFTE": 26.644781,
+          "actualTotalFTE": 24.737625,
+          "targetTotalFTE": 31.000048,
+          "actualUOS": 0,
+          "budgetUOS": 0
+        }
+      ],
+      "ytd": {
+        "actualUOS": 0,
+        "budgetUOS": 0
+      }
+    },
+    {
+      "costCenter": "107680002",
+      "manager": "Monglan",
+      "site": "CT Scan Blake Wilbur",
+      "location": "Blake Wilbur",
+      "modality": "ct",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 2.245125,
+          "targetProdFTE": 2.292757,
+          "actualTotalFTE": 2.370125,
+          "targetTotalFTE": 2.794434,
+          "actualUOS": 312.0,
+          "budgetUOS": 310.9517
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 2.747625,
+          "targetProdFTE": 2.483794,
+          "actualTotalFTE": 2.747625,
+          "targetTotalFTE": 3.027272,
+          "actualUOS": 338.0,
+          "budgetUOS": 310.9548
+        }
+      ],
+      "ytd": {
+        "actualUOS": 650.0,
+        "budgetUOS": 621.9065
+      }
+    },
+    {
+      "costCenter": "107680003",
+      "manager": "Monglan",
+      "site": "CT Scan EHC",
+      "location": "Emeryville",
+      "modality": "ct",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 1.5815,
+          "targetProdFTE": 1.332503,
+          "actualTotalFTE": 1.7165,
+          "targetTotalFTE": 1.41157,
+          "actualUOS": 151.0,
+          "budgetUOS": 199.29
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 1.263125,
+          "targetProdFTE": 1.411931,
+          "actualTotalFTE": 1.477875,
+          "targetTotalFTE": 1.495711,
+          "actualUOS": 160.0,
+          "budgetUOS": 199.289
+        }
+      ],
+      "ytd": {
+        "actualUOS": 311.0,
+        "budgetUOS": 398.579
+      }
+    },
+    {
+      "costCenter": "107680005",
+      "manager": "Monglan",
+      "site": "CT Scan 800P",
+      "location": "Main Campus",
+      "modality": "ct",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 41.640375,
+          "targetProdFTE": 37.971347,
+          "actualTotalFTE": 48.0945,
+          "targetTotalFTE": 42.471185,
+          "actualUOS": 3253.0,
+          "budgetUOS": 3305.8083
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 41.351125,
+          "targetProdFTE": 38.373994,
+          "actualTotalFTE": 47.125625,
+          "targetTotalFTE": 42.921549,
+          "actualUOS": 3290.0,
+          "budgetUOS": 3305.8074
+        }
+      ],
+      "ytd": {
+        "actualUOS": 6543.0,
+        "budgetUOS": 6611.6157
+      }
+    },
+    {
+      "costCenter": "107680006",
+      "manager": "Monglan",
+      "site": "CT Scan OPC",
+      "location": "Redwood City",
+      "modality": "ct",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 5.03025,
+          "targetProdFTE": 4.532423,
+          "actualTotalFTE": 6.56,
+          "targetTotalFTE": 5.171881,
+          "actualUOS": 471.0,
+          "budgetUOS": 497.6067
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 5.02325,
+          "targetProdFTE": 4.878824,
+          "actualTotalFTE": 5.734125,
+          "targetTotalFTE": 5.567155,
+          "actualUOS": 507.0,
+          "budgetUOS": 497.6091
+        }
+      ],
+      "ytd": {
+        "actualUOS": 978.0,
+        "budgetUOS": 995.2158
+      }
+    },
+    {
+      "costCenter": "107680007",
+      "manager": "Monglan",
+      "site": "CT Scan Palo Alto",
+      "location": "Sherman",
+      "modality": "ct",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 3.984625,
+          "targetProdFTE": 3.520265,
+          "actualTotalFTE": 5.4535,
+          "targetTotalFTE": 4.233192,
+          "actualUOS": 450.0,
+          "budgetUOS": 471.8117
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 4.16375,
+          "targetProdFTE": 4.060055,
+          "actualTotalFTE": 4.890625,
+          "targetTotalFTE": 4.8823,
+          "actualUOS": 519.0,
+          "budgetUOS": 471.8099
+        }
+      ],
+      "ytd": {
+        "actualUOS": 969.0,
+        "budgetUOS": 943.6216
+      }
+    },
+    {
+      "costCenter": "107680008",
+      "manager": "Monglan",
+      "site": "CT Scan SNHC",
+      "location": "SNHC",
+      "modality": "ct",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 3.052,
+          "targetProdFTE": 3.289001,
+          "actualTotalFTE": 3.05575,
+          "targetTotalFTE": 3.454567,
+          "actualUOS": 357.0,
+          "budgetUOS": 345.8117
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 3.4415,
+          "targetProdFTE": 3.132367,
+          "actualTotalFTE": 3.69525,
+          "targetTotalFTE": 3.290048,
+          "actualUOS": 340.0,
+          "budgetUOS": 345.8135
+        }
+      ],
+      "ytd": {
+        "actualUOS": 697.0,
+        "budgetUOS": 691.6252
+      }
+    },
+    {
+      "costCenter": "107680009",
+      "manager": "Monglan",
+      "site": "CT Scan SBCC",
+      "location": "South Bay",
+      "modality": "ct",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 4.640375,
+          "targetProdFTE": 4.750556,
+          "actualTotalFTE": 4.765375,
+          "targetTotalFTE": 5.120751,
+          "actualUOS": 543.0,
+          "budgetUOS": 536.7367
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 5.14425,
+          "targetProdFTE": 4.864299,
+          "actualTotalFTE": 5.69425,
+          "targetTotalFTE": 5.243359,
+          "actualUOS": 556.0,
+          "budgetUOS": 536.7357
+        }
+      ],
+      "ytd": {
+        "actualUOS": 1099.0,
+        "budgetUOS": 1073.4724
+      }
+    }
+  ],
+  "mammography": [
+    {
+      "costCenter": "107630015",
+      "manager": "Audrey",
+      "site": "Diag Rad Mammography Blake Wilbur",
+      "location": "Blake Wilbur",
+      "modality": "mammography",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 1.41175,
+          "targetProdFTE": 0.423367,
+          "actualTotalFTE": 1.51175,
+          "targetTotalFTE": 0.423367,
+          "actualUOS": 85.0,
+          "budgetUOS": 89.4367
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 2.766375,
+          "targetProdFTE": 0.657457,
+          "actualTotalFTE": 2.766375,
+          "targetTotalFTE": 0.657457,
+          "actualUOS": 132.0,
+          "budgetUOS": 89.4373
+        }
+      ],
+      "ytd": {
+        "actualUOS": 217.0,
+        "budgetUOS": 178.874
+      }
+    },
+    {
+      "costCenter": "107630016",
+      "manager": "Steph",
+      "site": "Diag Rad Mammography EHC",
+      "location": "Emeryville",
+      "modality": "mammography",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 2.711625,
+          "targetProdFTE": 2.677291,
+          "actualTotalFTE": 2.73825,
+          "targetTotalFTE": 2.763834,
+          "actualUOS": 167.0,
+          "budgetUOS": 163.835
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 2.236875,
+          "targetProdFTE": 2.565029,
+          "actualTotalFTE": 2.64225,
+          "targetTotalFTE": 2.647943,
+          "actualUOS": 160.0,
+          "budgetUOS": 163.8376
+        }
+      ],
+      "ytd": {
+        "actualUOS": 327.0,
+        "budgetUOS": 327.6726
+      }
+    },
+    {
+      "costCenter": "107630017",
+      "manager": "Audrey",
+      "site": "Diag Rad Mammography AMC Lane",
+      "location": "AMC",
+      "modality": "mammography",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 7.79425,
+          "targetProdFTE": 7.833508,
+          "actualTotalFTE": 8.660625,
+          "targetTotalFTE": 8.632094,
+          "actualUOS": 367.0,
+          "budgetUOS": 398.2183
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 7.879375,
+          "targetProdFTE": 7.66138,
+          "actualTotalFTE": 8.8145,
+          "targetTotalFTE": 8.444506,
+          "actualUOS": 358.0,
+          "budgetUOS": 398.2215
+        }
+      ],
+      "ytd": {
+        "actualUOS": 725.0,
+        "budgetUOS": 796.4398
+      }
+    },
+    {
+      "costCenter": "107630018",
+      "manager": "Audrey",
+      "site": "Diag Rad Mammography SBCC",
+      "location": "South Bay",
+      "modality": "mammography",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 4.397625,
+          "targetProdFTE": 4.49207,
+          "actualTotalFTE": 5.647375,
+          "targetTotalFTE": 5.560972,
+          "actualUOS": 336.0,
+          "budgetUOS": 344.7617
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 4.2905,
+          "targetProdFTE": 4.61243,
+          "actualTotalFTE": 4.766125,
+          "targetTotalFTE": 5.709972,
+          "actualUOS": 345.0,
+          "budgetUOS": 344.759
+        }
+      ],
+      "ytd": {
+        "actualUOS": 681.0,
+        "budgetUOS": 689.5207
+      }
+    },
+    {
+      "costCenter": "107630025",
+      "manager": "Audrey",
+      "site": "Diag Rad Mammography Hoover",
+      "location": "Hoover",
+      "modality": "mammography",
+      "isFTEOnly": false,
+      "isOR": false,
+      "periods": [
+        {
+          "period": "PP01",
+          "end": "9/12/26",
+          "actualProdFTE": 0.856125,
+          "targetProdFTE": 0.904424,
+          "actualTotalFTE": 1.056125,
+          "targetTotalFTE": 0.945101,
+          "actualUOS": 142.0,
+          "budgetUOS": 139.1483
+        },
+        {
+          "period": "PP02",
+          "end": "9/26/26",
+          "actualProdFTE": 0.802375,
+          "targetProdFTE": 0.929909,
+          "actualTotalFTE": 0.802375,
+          "targetTotalFTE": 0.971732,
+          "actualUOS": 146.0,
+          "budgetUOS": 139.1469
+        }
+      ],
+      "ytd": {
+        "actualUOS": 288.0,
+        "budgetUOS": 278.2952
+      }
+    }
+  ]
+};
+  var modalityConfig = {
+    xray: {
+      name: "X-Ray",
+      color: { primary: "#2563eb", secondary: "#1e40af", accent: "#3b82f6", light: "#dbeafe", lighter: "#eff6ff" },
+      productivityTarget: 0.75,
+      hasORSites: true,
+      label: "X-Ray"
+    },
+    ultrasound: {
+      name: "Ultrasound",
+      color: { primary: "#06b6d4", secondary: "#0891b2", accent: "#14b8a6", light: "#cffafe", lighter: "#ecfeff" },
+      productivityTarget: 1.63,
+      hasORSites: false,
+      label: "Ultrasound"
+    },
+    ct: {
+      name: "CT Scan",
+      color: { primary: "#10b981", secondary: "#059669", accent: "#34d399", light: "#d1fae5", lighter: "#ecfdf5" },
+      productivityTarget: 0.836,
+      hasORSites: false,
+      label: "CT"
+    },
+    mri: {
+      name: "MRI",
+      color: { primary: "#f59e0b", secondary: "#d97706", accent: "#fbbf24", light: "#fef3c7", lighter: "#fefce8" },
+      productivityTarget: 2.496,
+      hasORSites: false,
+      label: "MRI"
+    },
+    mammography: {
+      name: "Mammography",
+      color: { primary: "#8b5cf6", secondary: "#7c3aed", accent: "#a78bfa", light: "#ede9fe", lighter: "#f5f3ff" },
+      productivityTarget: 1.52,
+      hasORSites: false,
+      label: "Mammography"
+    },
+    nuclearMedicine: {
+      name: "Nuclear Medicine",
+      color: { primary: "#a855f7", secondary: "#9333ea", accent: "#c084fc", light: "#f3e8ff", lighter: "#faf5ff" },
+      productivityTarget: 3.5,
+      hasORSites: false,
+      label: "Nuclear Medicine"
+    },
+    admin: {
+      name: "Admin",
+      color: { primary: "#64748b", secondary: "#475569", accent: "#94a3b8", light: "#f1f5f9", lighter: "#f8fafc" },
+      productivityTarget: null,
+      hasORSites: false,
+      label: "Admin",
+      isFTEOnly: true
+    }
+  };
+  var UnifiedImagingDashboard = () => {
+    const [selectedSite, setSelectedSite] = useState(null);
+    const [comparisonExpanded, setComparisonExpanded] = useState(false);
+    const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+    const heatmapView = false; const setHeatmapView = () => {};
+    const [tutorialMode, setTutorialMode] = useState(false);
+    const [selectedModalities, setSelectedModalities] = useState(["xray", "ultrasound", "ct", "mri", "mammography", "nuclearMedicine", "admin"]);
+    const [selectedLocations, setSelectedLocations] = useState([]);
+    const [selectedManagers, setSelectedManagers] = useState([]);
+    const toggleModality = (mod) => {
+      setSelectedModalities(
+        (prev) => prev.includes(mod) ? prev.filter((m) => m !== mod) : [...prev, mod]
+      );
+    };
+    const toggleLocation = (loc) => {
+      setSelectedLocations(
+        (prev) => prev.includes(loc) ? prev.filter((l) => l !== loc) : [...prev, loc]
+      );
+    };
+    const toggleManager = (mgr) => {
+      setSelectedManagers(
+        (prev) => prev.includes(mgr) ? prev.filter((m) => m !== mgr) : [...prev, mgr]
+      );
+    };
+    const uniqueLocations = useMemo(() => {
+      const locations = /* @__PURE__ */ new Set();
+      Object.values(data).flat().forEach((site) => {
+        if (site.location) locations.add(site.location);
+      });
+      return Array.from(locations).sort();
+    }, []);
+    const uniqueManagers = useMemo(() => {
+      const managers = /* @__PURE__ */ new Set();
+      Object.values(data).flat().forEach((site) => {
+        if (site.manager) managers.add(site.manager);
+      });
+      return Array.from(managers).sort();
+    }, []);
+    const allSites = useMemo(() => {
+      let sites = [];
+      selectedModalities.forEach((mod) => {
+        if (data[mod]) {
+          sites = [...sites, ...data[mod]];
+        }
+      });
+      return sites;
+    }, [selectedModalities]);
+    const filteredSites = useMemo(() => {
+      let sites = allSites;
+      if (selectedLocations.length > 0) {
+        sites = sites.filter((site) => selectedLocations.includes(site.location));
+      }
+      if (selectedManagers.length > 0) {
+        sites = sites.filter((site) => selectedManagers.includes(site.manager));
+      }
+      return sites;
+    }, [allSites, selectedLocations, selectedManagers]);
+    const sitesByModality = useMemo(() => {
+      const grouped = {};
+      selectedModalities.forEach((mod) => {
+        grouped[mod] = filteredSites.filter((site) => site.modality === mod);
+      });
+      return grouped;
+    }, [filteredSites, selectedModalities]);
+    const [hoveredMetric, setHoveredMetric] = useState(null);
+    const [tutorialSite, setTutorialSite] = useState("107183003");
+    const tooltips = {
+      ytdUOS: "Total number of patients/exams served so far this year. Higher is better - means you're seeing more patients.",
+      ytdORMinutes: "Total OR procedures used so far this year. This measures OR procedure volume.",
+      uosVariance: "Are we seeing more or fewer patients than planned? Green (positive) means we're exceeding our goal. Red (negative) means we're below target.",
+      totalFTE: "Average staffing level - how many full-time equivalent employees work at this site. This is the actual headcount.",
+      fteVariance: "Are we using more or fewer staff than budgeted? Green (negative %) means we're under budget - good for cost control. Red (positive %) means we're over budget.",
+      productivity: "Efficiency metric: productive staff hours per UOS. Lower numbers mean staff are more efficient. Calculated as productive FTE hours divided by units of service.",
+      productivityOR: "Efficiency metric for OR: Staff hours per OR procedure. Lower numbers mean staff are more efficient with OR time. Calculated as staff hours divided by OR procedures.",
+      status: "Quick health check: Excellent/Good = on track, Monitor = needs attention, Alert = requires immediate action.",
+      varianceChart: "Visual comparison to budget. The center line is your budget target. Green bars show favorable performance, red bars show areas needing improvement.",
+      periodTable: "Detailed breakdown by pay period showing actual vs target for both volume (UOS) and staffing (FTE). Look for trends over time - are things improving or getting worse?"
+    };
+    const calculateMetrics = (site) => {
+      if (site.isFTEOnly) {
+        const totalActualFTE2 = site.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0);
+        const totalTargetFTE2 = site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0);
+        const fteVariance2 = totalTargetFTE2 !== 0 ? (totalActualFTE2 - totalTargetFTE2) / totalTargetFTE2 * 100 : 0;
+        return { uosVariance: 0, fteVariance: fteVariance2, productivity: 0, isFTEOnly: true };
+      }
+      const uosVariance = site.ytd.budgetUOS !== 0 ? (site.ytd.actualUOS - site.ytd.budgetUOS) / site.ytd.budgetUOS * 100 : 0;
+      const totalActualFTE = site.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0);
+      const totalTargetFTE = site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0);
+      const fteVariance = totalTargetFTE !== 0 ? (totalActualFTE - totalTargetFTE) / totalTargetFTE * 100 : 0;
+      const avgFTE = totalActualFTE / site.periods.length;
+      const totalProdFTE = site.periods.reduce((sum, p) => sum + (p.actualProdFTE || 0), 0);
+      const totalProdHours = totalProdFTE * 80;
+      const productivity = site.ytd.actualUOS > 0 ? totalProdHours / site.ytd.actualUOS : 0;
+      return { uosVariance, fteVariance, productivity, isFTEOnly: false };
+    };
+    const getOverallAssessment = (uosVariance, fteVariance) => {
+      if (uosVariance < 0 && fteVariance <= uosVariance) {
+        return { label: "needs monitoring", score: 3, color: "#d97706" };
+      }
+      if (uosVariance < -10 || fteVariance > 20 || uosVariance < -5 && fteVariance > 15) {
+        return { label: "needs immediate action", score: 5, color: "#dc2626" };
+      } else if (uosVariance < -5 || fteVariance > 10 || uosVariance < 0 && fteVariance > 5) {
+        return { label: "needs attention", score: 4, color: "#ea580c" };
+      } else if (uosVariance < 0 || fteVariance > 0 || uosVariance < 3) {
+        return { label: "needs monitoring", score: 3, color: "#d97706" };
+      } else if (uosVariance > 5 && fteVariance < 0 || uosVariance > 10 && fteVariance < 5) {
+        return { label: "strong performance", score: 1, color: "#047857" };
+      }
+      return { label: "doing well", score: 2, color: "#059669" };
+    };
+    const getUOSStatus = (uosVar) => {
+      if (uosVar > 5) return { label: "Excellent", color: "excellent" };
+      if (uosVar > 0) return { label: "Good", color: "good" };
+      if (uosVar > -5) return { label: "Monitor", color: "monitor" };
+      return { label: "Alert", color: "alert" };
+    };
+    const getFTEStatus = (fteVar) => {
+      if (fteVar < -5) return { label: "Excellent", color: "excellent" };
+      if (fteVar < 0) return { label: "Good", color: "good" };
+      if (fteVar < 10) return { label: "Monitor", color: "monitor" };
+      return { label: "Alert", color: "alert" };
+    };
+    const getStatusStyle = (color) => {
+      const styles = {
+        excellent: { background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.3)", color: "#059669" },
+        good: { background: "rgba(59, 130, 246, 0.1)", border: "1px solid rgba(59, 130, 246, 0.3)", color: "#2563eb" },
+        monitor: { background: "rgba(251, 191, 36, 0.1)", border: "1px solid rgba(251, 191, 36, 0.3)", color: "#d97706" },
+        alert: { background: "rgba(239, 68, 68, 0.1)", border: "1px solid rgba(239, 68, 68, 0.3)", color: "#dc2626" }
+      };
+      return styles[color] || styles.monitor;
+    };
+    const getVarianceColor = (variance, isUOS = true) => {
+      if (Math.abs(variance) < 1) return "#334155";
+      if (isUOS) {
+        return variance > 0 ? "#059669" : "#dc2626";
+      } else {
+        return variance < 0 ? "#059669" : "#dc2626";
+      }
+    };
+    const getHeatmapColor = (value, type, allValues = []) => {
+      const colors = {
+        deepGreen: { bg: "#d1fae5", color: "#065f46", border: "#10b981" },
+        softGreen: { bg: "#ecfdf5", color: "#047857", border: "#6ee7b7" },
+        neutralGray: { bg: "#f1f5f9", color: "#475569", border: "#cbd5e1" },
+        softRed: { bg: "#fee2e2", color: "#dc2626", border: "#fca5a5" },
+        deepRed: { bg: "#fecaca", color: "#991b1b", border: "#ef4444" },
+        yellowGreen: { bg: "#d9f99d", color: "#3f6212", border: "#84cc16" },
+        yellow: { bg: "#fef08a", color: "#854d0e", border: "#eab308" }
+      };
+      if (type === "uosVar") {
+        if (value > 10) return colors.deepGreen;
+        if (value > 5) return colors.softGreen;
+        if (value >= -5) return colors.neutralGray;
+        if (value >= -10) return colors.softRed;
+        return colors.deepRed;
+      }
+      if (type === "fteVar") {
+        if (value < -10) return colors.deepGreen;
+        if (value < -5) return colors.softGreen;
+        if (value <= 5) return colors.neutralGray;
+        if (value <= 10) return colors.softRed;
+        return colors.deepRed;
+      }
+      if (type === "productivity") {
+        if (!allValues || allValues.length === 0) return colors.neutralGray;
+        const sorted = [...allValues].sort((a, b) => a - b);
+        const rank = sorted.indexOf(value);
+        const total = sorted.length;
+        if (rank < 3) return colors.deepGreen;
+        if (rank < 6) return colors.yellowGreen;
+        return colors.yellow;
+      }
+      return colors.neutralGray;
+    };
+    const filteredData = useMemo(() => {
+      if (tutorialMode && tutorialSite) {
+        let allSitesForTutorial = [];
+        Object.keys(data).forEach((mod) => {
+          if (data[mod]) {
+            allSitesForTutorial = [...allSitesForTutorial, ...data[mod]];
+          }
+        });
+        return allSitesForTutorial.filter((site) => site.costCenter === tutorialSite);
+      }
+      if (selectedSite && selectedSite !== "ROLLUP") {
+        return filteredSites.filter((site) => site.costCenter === selectedSite);
+      }
+      return filteredSites;
+    }, [selectedSite, tutorialMode, tutorialSite, filteredSites]);
+    const handleSort = (key) => {
+      let direction = "asc";
+      if (sortConfig.key === key && sortConfig.direction === "asc") {
+        direction = "desc";
+      }
+      setSortConfig({ key, direction });
+    };
+    const sortedData = useMemo(() => {
+      if (!sortConfig.key) return filteredData;
+      const sorted = [...filteredData].sort((a, b) => {
+        let aValue, bValue;
+        switch (sortConfig.key) {
+          case "site":
+            aValue = a.site;
+            bValue = b.site;
+            break;
+          case "ytdUOS":
+            aValue = a.ytd.actualUOS;
+            bValue = b.ytd.actualUOS;
+            break;
+          case "uosVar":
+            aValue = a.ytd.budgetUOS !== 0 ? (a.ytd.actualUOS - a.ytd.budgetUOS) / a.ytd.budgetUOS * 100 : 0;
+            bValue = b.ytd.budgetUOS !== 0 ? (b.ytd.actualUOS - b.ytd.budgetUOS) / b.ytd.budgetUOS * 100 : 0;
+            break;
+          case "totalFTE":
+            aValue = a.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / a.periods.length;
+            bValue = b.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / b.periods.length;
+            break;
+          case "fteVar":
+            const aTotalActualFTE = a.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0);
+            const aTotalTargetFTE = a.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0);
+            aValue = aTotalTargetFTE !== 0 ? (aTotalActualFTE - aTotalTargetFTE) / aTotalTargetFTE * 100 : 0;
+            const bTotalActualFTE = b.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0);
+            const bTotalTargetFTE = b.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0);
+            bValue = bTotalTargetFTE !== 0 ? (bTotalActualFTE - bTotalTargetFTE) / bTotalTargetFTE * 100 : 0;
+            break;
+          case "fteVarActual":
+            const aAvgActual = a.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / a.periods.length;
+            const aAvgTarget = a.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / a.periods.length;
+            aValue = aAvgActual - aAvgTarget;
+            const bAvgActual = b.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / b.periods.length;
+            const bAvgTarget = b.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / b.periods.length;
+            bValue = bAvgActual - bAvgTarget;
+            break;
+          case "productivity":
+            const aAvgFTE = a.isFTEOnly ? 0 : a.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / a.periods.length;
+            const aTotalHours = aAvgFTE * 80 * a.periods.length;
+            aValue = a.isFTEOnly ? Infinity : a.ytd.actualUOS > 0 ? aTotalHours / a.ytd.actualUOS : Infinity;
+            const bAvgFTE = b.isFTEOnly ? 0 : b.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / b.periods.length;
+            const bTotalHours = bAvgFTE * 80 * b.periods.length;
+            bValue = b.isFTEOnly ? Infinity : b.ytd.actualUOS > 0 ? bTotalHours / b.ytd.actualUOS : Infinity;
+            break;
+          case "assessment":
+            const aMetrics = calculateMetrics(a);
+            const bMetrics = calculateMetrics(b);
+            aValue = getOverallAssessment(aMetrics.uosVariance, aMetrics.fteVariance).score;
+            bValue = getOverallAssessment(bMetrics.uosVariance, bMetrics.fteVariance).score;
+            break;
+          default:
+            return 0;
+        }
+        if (typeof aValue === "string") {
+          return sortConfig.direction === "asc" ? aValue.localeCompare(bValue) : bValue.localeCompare(aValue);
+        }
+        return sortConfig.direction === "asc" ? aValue - bValue : bValue - aValue;
+      });
+      return sorted;
+    }, [filteredData, sortConfig]);
+    return /* @__PURE__ */ React.createElement("div", { style: { minHeight: "100vh", background: "linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)", padding: "40px 24px" } }, /* @__PURE__ */ React.createElement("div", { style: { maxWidth: "1800px", margin: "0 auto" } }, /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "48px" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "24px", flexWrap: "wrap", gap: "24px" } }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("h1", { style: { fontSize: "42px", fontWeight: "700", background: "linear-gradient(135deg, #2563eb 0%, #7c3aed 100%)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", marginBottom: "8px" } }, "Imaging Services Dashboard - FY27 PP02"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "16px", color: "#64748b", fontWeight: "500" } }, "Sources: Finance labor detail + Imaging UOS, PP01-PP02 (Oct 9, 2026) \u2022 Stanford Health Care Imaging Services  ", /* @__PURE__*/ React.createElement("a", { href: "fte-detail.html", style: { fontSize: "14px", color: "#3b82f6", textDecoration: "none", fontWeight: "500", marginLeft: "8px" } }, "FTE Detail (FY26 PP21)"))), /* @__PURE__ */ React.createElement("div", { style: { background: "white", border: "1px solid #e2e8f0", padding: "16px 24px", borderRadius: "12px", boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "12px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "4px" } }, "Fiscal Year"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "20px", fontWeight: "700", color: "#2563eb" } }, "FY27 \u2022 PP01-PP02")))), /* @__PURE__ */ React.createElement("div", { style: {
+      background: "white",
+      padding: "20px",
+      borderRadius: "8px",
+      marginBottom: "20px",
+      boxShadow: "0 1px 3px rgba(0,0,0,0.1)"
+    } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" } }, /* @__PURE__ */ React.createElement("h3", { style: { margin: 0, fontSize: "16px", fontWeight: "600", color: "#0f172a" } }, "Filter by Modality"), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: "12px", fontSize: "13px" } }, /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        onClick: () => setSelectedModalities(["xray", "ultrasound", "ct", "mri", "mammography", "nuclearMedicine", "admin"]),
+        style: {
+          color: "#64748b",
+          cursor: "pointer",
+          fontWeight: "500",
+          transition: "color 0.2s",
+          ":hover": { color: "#0f172a" }
+        },
+        onMouseEnter: (e) => e.target.style.color = "#0f172a",
+        onMouseLeave: (e) => e.target.style.color = "#64748b"
+      },
+      "Select All"
+    ), /* @__PURE__ */ React.createElement("span", { style: { color: "#cbd5e1" } }, "|"), /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        onClick: () => setSelectedModalities([]),
+        style: {
+          color: "#64748b",
+          cursor: "pointer",
+          fontWeight: "500",
+          transition: "color 0.2s"
+        },
+        onMouseEnter: (e) => e.target.style.color = "#0f172a",
+        onMouseLeave: (e) => e.target.style.color = "#64748b"
+      },
+      "Clear All"
+    ))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: "8px" } }, ["xray", "ultrasound", "ct", "mri", "mammography", "nuclearMedicine", "admin"].map((mod) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: mod,
+        onClick: () => toggleModality(mod),
+        style: {
+          padding: "8px 16px",
+          borderRadius: "6px",
+          border: "2px solid",
+          borderColor: selectedModalities.includes(mod) ? modalityConfig[mod].color.primary : "#e2e8f0",
+          background: selectedModalities.includes(mod) ? modalityConfig[mod].color.primary : "white",
+          color: selectedModalities.includes(mod) ? "white" : "#64748b",
+          fontSize: "14px",
+          fontWeight: "600",
+          cursor: "pointer",
+          transition: "all 0.2s"
+        }
+      },
+      modalityConfig[mod].label
+    )))), /* @__PURE__ */ React.createElement("div", { style: {
+      background: "white",
+      padding: "20px",
+      borderRadius: "8px",
+      marginBottom: "20px",
+      boxShadow: "0 1px 3px rgba(0,0,0,0.1)"
+    } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" } }, /* @__PURE__ */ React.createElement("h3", { style: { margin: 0, fontSize: "16px", fontWeight: "600", color: "#0f172a" } }, "Filter by Location ", selectedLocations.length > 0 && `(${selectedLocations.length} selected)`), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: "12px", fontSize: "13px" } }, /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        onClick: () => setSelectedLocations([...uniqueLocations]),
+        style: {
+          color: "#64748b",
+          cursor: "pointer",
+          fontWeight: "500",
+          transition: "color 0.2s"
+        },
+        onMouseEnter: (e) => e.target.style.color = "#0f172a",
+        onMouseLeave: (e) => e.target.style.color = "#64748b"
+      },
+      "Select All"
+    ), /* @__PURE__ */ React.createElement("span", { style: { color: "#cbd5e1" } }, "|"), /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        onClick: () => setSelectedLocations([]),
+        style: {
+          color: "#64748b",
+          cursor: "pointer",
+          fontWeight: "500",
+          transition: "color 0.2s"
+        },
+        onMouseEnter: (e) => e.target.style.color = "#0f172a",
+        onMouseLeave: (e) => e.target.style.color = "#64748b"
+      },
+      "Clear All"
+    ))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: "8px" } }, uniqueLocations.map((loc) => /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: loc,
+        onClick: () => toggleLocation(loc),
+        style: {
+          padding: "8px 16px",
+          borderRadius: "6px",
+          border: "2px solid",
+          borderColor: selectedLocations.includes(loc) ? "#2563eb" : "#e2e8f0",
+          background: selectedLocations.includes(loc) ? "#2563eb" : "white",
+          color: selectedLocations.includes(loc) ? "white" : "#64748b",
+          fontSize: "14px",
+          fontWeight: "600",
+          cursor: "pointer",
+          transition: "all 0.2s"
+        }
+      },
+      loc
+    )))), /* @__PURE__ */ React.createElement("div", { style: {
+      background: "white",
+      padding: "20px",
+      borderRadius: "8px",
+      marginBottom: "20px",
+      boxShadow: "0 1px 3px rgba(0,0,0,0.1)"
+    } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" } }, /* @__PURE__ */ React.createElement("h3", { style: { margin: 0, fontSize: "16px", fontWeight: "600", color: "#0f172a" } }, "Filter by Manager ", selectedManagers.length > 0 && "(" + selectedManagers.length + " selected)"), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: "12px", fontSize: "13px" } }, /* @__PURE__  */ React.createElement(
+      "span",
+      {
+        onClick: function() { setSelectedManagers([].concat(uniqueManagers)); },
+        style: {
+          color: "#64748b",
+          cursor: "pointer",
+          fontWeight: "500",
+          transition: "color 0.2s"
+        },
+        onMouseEnter: function(e) { e.target.style.color = "#0f172a"; },
+        onMouseLeave: function(e) { e.target.style.color = "#64748b"; }
+      },
+      "Select All"
+    ), /* @__PURE__ */ React.createElement("span", { style: { color: "#cbd5e1" } }, "|"), /* @__PURE__ */ React.createElement(
+      "span",
+      {
+        onClick: function() { setSelectedManagers([]); },
+        style: {
+          color: "#64748b",
+          cursor: "pointer",
+          fontWeight: "500",
+          transition: "color 0.2s"
+        },
+        onMouseEnter: function(e) { e.target.style.color = "#0f172a"; },
+        onMouseLeave: function(e) { e.target.style.color = "#64748b"; }
+      },
+      "Clear All"
+    ))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", flexWrap: "wrap", gap: "8px" } }, uniqueManagers.map(function(mgr) { return /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        key: mgr,
+        onClick: function() { toggleManager(mgr); },
+        style: {
+          padding: "8px 16px",
+          borderRadius: "6px",
+          border: "2px solid",
+          borderColor: selectedManagers.includes(mgr) ? "#7c3aed" : "#e2e8f0",
+          background: selectedManagers.includes(mgr) ? "#7c3aed" : "white",
+          color: selectedManagers.includes(mgr) ? "white" : "#64748b",
+          fontSize: "14px",
+          fontWeight: "600",
+          cursor: "pointer",
+          transition: "all 0.2s"
+        }
+      },
+      mgr
+    ); }))), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: "16px", alignItems: "flex-end", marginBottom: "16px" } }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1 } }, /* @__PURE__ */ React.createElement("label", { style: { fontSize: "12px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", display: "block", marginBottom: "8px" } }, "Site Filter"), /* @__PURE__ */ React.createElement(
+      "select",
+      {
+        value: selectedSite || "",
+        onChange: (e) => setSelectedSite(e.target.value || null),
+        style: { background: "white", border: "1px solid #cbd5e1", color: "#1e293b", padding: "12px 16px", borderRadius: "8px", fontSize: "14px", cursor: "pointer", width: "100%", boxShadow: "0 1px 3px rgba(0, 0, 0, 0.05)" }
+      },
+      /* @__PURE__ */ React.createElement("option", { value: "" }, "All Sites"),
+      /* @__PURE__ */ React.createElement("option", { value: "ROLLUP" }, "All Services Roll-Up"),
+      filteredSites.map((site) => /* @__PURE__ */ React.createElement("option", { key: site.costCenter, value: site.costCenter }, site.site))
+    )), /* @__PURE__ */ React.createElement(
+      "button",
+      {
+        onClick: () => {
+          setTutorialMode(!tutorialMode);
+          if (!tutorialMode) {
+            setTutorialSite("107183003");
+            setSelectedSite("107183003");
+          } else {
+            setSelectedSite(null);
+            setHoveredMetric(null);
+          }
+        },
+        style: {
+          background: tutorialMode ? "#2563eb" : "white",
+          color: tutorialMode ? "white" : "#2563eb",
+          border: `2px solid ${tutorialMode ? "#2563eb" : "#bfdbfe"}`,
+          padding: "12px 24px",
+          borderRadius: "8px",
+          fontSize: "14px",
+          fontWeight: "600",
+          cursor: "pointer",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          transition: "all 0.2s",
+          whiteSpace: "nowrap"
+        }
+      },
+      /* @__PURE__ */ React.createElement("span", { style: { fontSize: "18px" } }, "\u{1F4CA}"),
+      tutorialMode ? "Exit Tutorial" : "Tutorial Mode"
+    )), tutorialMode && /* @__PURE__ */ React.createElement("div", { style: { background: "#dbeafe", border: "2px solid #2563eb", padding: "16px 20px", borderRadius: "8px", fontSize: "14px", color: "#1e40af", marginBottom: "16px" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" } }, /* @__PURE__ */ React.createElement(CheckCircle, { size: 20 }), /* @__PURE__ */ React.createElement("span", null, /* @__PURE__ */ React.createElement("strong", null, "Tutorial Mode Active:"), " Select a site below to view guided analysis with step-by-step walkthrough.")), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#1e40af", marginBottom: "12px", paddingLeft: "32px" } }, "✓ ", /* @__PURE__ */ React.createElement("strong", null, "Tip:"), " Hover over metrics in the site card to see detailed explanations."), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "12px" } }, /* @__PURE__ */ React.createElement("label", { style: { fontSize: "13px", fontWeight: "600", color: "#1e40af" } }, "Analyze Site:"), /* @__PURE__ */ React.createElement(
+      "select",
+      {
+        value: tutorialSite,
+        onChange: (e) => {
+          setTutorialSite(e.target.value);
+          setSelectedSite(e.target.value);
+        },
+        style: {
+          background: "white",
+          border: "1px solid #2563eb",
+          color: "#1e293b",
+          padding: "8px 12px",
+          borderRadius: "6px",
+          fontSize: "13px",
+          cursor: "pointer",
+          flex: 1,
+          maxWidth: "400px"
+        }
+      },
+      (() => {
+        let allSitesForDropdown = [];
+        Object.keys(data).forEach((mod) => {
+          if (data[mod]) {
+            allSitesForDropdown = [...allSitesForDropdown, ...data[mod]];
+          }
+        });
+        return allSitesForDropdown.filter((site) => !site.isFTEOnly).map((site) => /* @__PURE__ */ React.createElement("option", { key: site.costCenter, value: site.costCenter }, site.site));
+      })()
+    )))), !tutorialMode && /* @__PURE__ */ React.createElement("div", { style: {
+      background: "white",
+      border: "1px solid #e2e8f0",
+      borderRadius: "16px",
+      padding: "24px",
+      boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+      marginBottom: "24px"
+    } }, /* @__PURE__ */ React.createElement(
+      "div",
+      {
+        style: { display: "flex", alignItems: "center", justifyContent: "space-between", cursor: "pointer" },
+        onClick: () => setComparisonExpanded(!comparisonExpanded)
+      },
+      /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "12px", flex: 1 } }, /* @__PURE__ */ React.createElement(Activity, { size: 20, style: { color: "#2563eb" } }), /* @__PURE__ */ React.createElement("h2", { style: { fontSize: "20px", fontWeight: "700", color: "#0f172a", margin: 0 } }, "Site Comparison Table"), /* @__PURE__ */ React.createElement("span", { style: { fontSize: "13px", color: "#64748b", fontWeight: "500" } }, "(", comparisonExpanded ? "Click to collapse" : "Click to expand", ")")),
+      /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "12px" } }, false && /* @__PURE__ */ React.createElement(
+        "button",
+        {
+          onClick: (e) => {
+            e.stopPropagation();
+            setHeatmapView(!heatmapView);
+          },
+          style: {
+            background: heatmapView ? "#2563eb" : "white",
+            color: heatmapView ? "white" : "#2563eb",
+            border: `2px solid ${heatmapView ? "#2563eb" : "#bfdbfe"}`,
+            padding: "8px 16px",
+            borderRadius: "8px",
+            fontSize: "13px",
+            fontWeight: "600",
+            cursor: "pointer",
+            display: "flex",
+            alignItems: "center",
+            gap: "6px",
+            transition: "all 0.2s"
+          }
+        },
+        /* @__PURE__ */ React.createElement("span", { style: { fontSize: "16px" } }, ""),
+        heatmapView ? "" : ""
+      ), /* @__PURE__ */ React.createElement("div", { style: {
+        transform: comparisonExpanded ? "rotate(180deg)" : "rotate(0deg)",
+        transition: "transform 0.3s",
+        color: "#64748b"
+      } }, /* @__PURE__ */ React.createElement(TrendingDown, { size: 20 })))
+    ), comparisonExpanded && /* @__PURE__ */ React.createElement("div", { style: { overflowX: "auto" } }, /* @__PURE__ */ React.createElement("table", { style: { width: "100%", borderCollapse: "collapse", fontSize: "13px" } }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", { style: { background: "#f1f5f9" } }, /* @__PURE__ */ React.createElement("th", { style: { padding: "8px 12px", position: "sticky", left: 0, background: "#f1f5f9", zIndex: 10 } }), /* @__PURE__ */ React.createElement("th", { colSpan: 3, style: { padding: "8px 12px", textAlign: "center", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.05em", color: "#0f172a", fontWeight: "700", borderLeft: "1px solid #e2e8f0" } }, "Volume"), /* @__PURE__ */ React.createElement("th", { colSpan: 4, style: { padding: "8px 12px", textAlign: "center", fontSize: "14px", textTransform: "uppercase", letterSpacing: "0.05em", color: "#0f172a", fontWeight: "700", borderLeft: "1px solid #e2e8f0" } }, "FTE"), /* @__PURE__ */ React.createElement("th", { colSpan: 2, style: { padding: "8px 12px", textAlign: "center", fontSize: "10px", textTransform: "uppercase", letterSpacing: "0.1em", color: "#475569", fontWeight: "600", borderLeft: "1px solid #e2e8f0" } })), /* @__PURE__ */ React.createElement("tr", { style: { background: "#f8fafc", borderBottom: "2px solid #cbd5e1" } }, /* @__PURE__ */ React.createElement(
+      "th",
+      {
+        onClick: () => handleSort("site"),
+        style: {
+          padding: "12px",
+          textAlign: "left",
+          fontSize: "11px",
+          textTransform: "uppercase",
+          color: "#475569",
+          fontWeight: "700",
+          position: "sticky",
+          left: 0,
+          background: "#f8fafc",
+          zIndex: 10,
+          cursor: "pointer",
+          userSelect: "none"
+        }
+      },
+      "Site ",
+      sortConfig.key === "site" && (sortConfig.direction === "asc" ? "↑" : "↓")
+    ), /* @__PURE__ */ React.createElement(
+      "th",
+      {
+        onClick: () => handleSort("ytdUOS"),
+        style: {
+          padding: "12px",
+          textAlign: "right",
+          fontSize: "11px",
+          textTransform: "uppercase",
+          color: "#475569",
+          fontWeight: "700",
+          cursor: "pointer",
+          userSelect: "none",
+          borderLeft: "1px solid #e2e8f0"
+        }
+      },
+      "YTD UOS ",
+      sortConfig.key === "ytdUOS" && (sortConfig.direction === "asc" ? "↑" : "↓")
+    ), /* @__PURE__ */ React.createElement("th", { style: { padding: "12px", textAlign: "right", fontSize: "11px", textTransform: "uppercase", color: "#94a3b8", fontWeight: "600" } }, "UOS Bud"), /* @__PURE__ */ React.createElement(
+      "th",
+      {
+        onClick: () => handleSort("uosVar"),
+        style: {
+          padding: "12px",
+          textAlign: "right",
+          fontSize: "11px",
+          textTransform: "uppercase",
+          color: "#475569",
+          fontWeight: "700",
+          cursor: "pointer",
+          userSelect: "none"
+        }
+      },
+      "UOS Var% ",
+      sortConfig.key === "uosVar" && (sortConfig.direction === "asc" ? "↑" : "↓")
+    ), /* @__PURE__ */ React.createElement(
+      "th",
+      {
+        onClick: () => handleSort("totalFTE"),
+        style: {
+          padding: "12px",
+          textAlign: "right",
+          fontSize: "11px",
+          textTransform: "uppercase",
+          color: "#475569",
+          fontWeight: "700",
+          cursor: "pointer",
+          userSelect: "none",
+          borderLeft: "1px solid #e2e8f0"
+        }
+      },
+      "Avg Paid FTE ",
+      sortConfig.key === "totalFTE" && (sortConfig.direction === "asc" ? "↑" : "↓")
+    ), /* @__PURE__ */ React.createElement("th", { style: { padding: "12px", textAlign: "right", fontSize: "11px", textTransform: "uppercase", color: "#94a3b8", fontWeight: "600" } }, "FTE Bud"), /* @__PURE__ */ React.createElement("th", { onClick: () => handleSort("fteVarActual"), style: { padding: "12px", textAlign: "right", fontSize: "11px", textTransform: "uppercase", color: "#475569", fontWeight: "700", cursor: "pointer", userSelect: "none" } }, "FTE Var ", sortConfig.key === "fteVarActual" && (sortConfig.direction === "asc" ? "\u2191" : "\u2193")), /* @__PURE__ */ React.createElement(
+      "th",
+      {
+        onClick: () => handleSort("fteVar"),
+        style: {
+          padding: "12px",
+          textAlign: "right",
+          fontSize: "11px",
+          textTransform: "uppercase",
+          color: "#475569",
+          fontWeight: "700",
+          cursor: "pointer",
+          userSelect: "none"
+        }
+      },
+      "FTE Var% ",
+      sortConfig.key === "fteVar" && (sortConfig.direction === "asc" ? "↑" : "↓")
+    ), /* @__PURE__ */ React.createElement(
+      "th",
+      {
+        onClick: () => handleSort("productivity"),
+        style: {
+          padding: "12px",
+          textAlign: "right",
+          fontSize: "11px",
+          textTransform: "uppercase",
+          color: "#475569",
+          fontWeight: "700",
+          cursor: "pointer",
+          userSelect: "none",
+          borderLeft: "1px solid #e2e8f0"
+        }
+      },
+      "Productivity ",
+      sortConfig.key === "productivity" && (sortConfig.direction === "asc" ? "↑" : "↓")
+    ), /* @__PURE__ */ React.createElement(
+      "th",
+      {
+        onClick: () => handleSort("assessment"),
+        style: {
+          padding: "12px",
+          textAlign: "center",
+          fontSize: "11px",
+          textTransform: "uppercase",
+          color: "#475569",
+          fontWeight: "700",
+          cursor: "pointer",
+          userSelect: "none"
+        }
+      },
+      "Assessment ",
+      sortConfig.key === "assessment" && (sortConfig.direction === "asc" ? "↑" : "↓")
+    ))), /* @__PURE__ */ React.createElement("tbody", null, (() => {
+      const allProductivityValues = sortedData.map((site) => {
+        const { productivity } = calculateMetrics(site);
+        return productivity;
+      });
+      return sortedData.map((site, index) => {
+        const { uosVariance, fteVariance, productivity, isFTEOnly } = calculateMetrics(site);
+        const avgFTE = site.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / site.periods.length;
+        const uosHeatmap = getHeatmapColor(uosVariance, "uosVar");
+        const fteHeatmap = getHeatmapColor(fteVariance, "fteVar");
+        const prodHeatmap = getHeatmapColor(productivity, "productivity", allProductivityValues);
+        return /* @__PURE__ */ React.createElement("tr", { key: site.costCenter, style: {
+          background: index % 2 === 0 ? "white" : "#f8fafc",
+          transition: "background 0.2s"
+        } }, /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          fontWeight: "600",
+          color: "#0f172a",
+          position: "sticky",
+          left: 0,
+          background: index % 2 === 0 ? "white" : "#f8fafc",
+          zIndex: 5
+        } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px" } }, site.site), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "10px", color: "#64748b", marginTop: "2px" } }, site.costCenter)), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          borderLeft: "1px solid #e2e8f0",
+          color: "#334155",
+          textAlign: "right",
+          fontWeight: "600"
+        } }, isFTEOnly ? "\u2013" : site.ytd.actualUOS.toLocaleString()), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          color: "#64748b",
+          textAlign: "right"
+        } }, isFTEOnly ? "\u2013" : site.ytd.budgetUOS.toLocaleString()), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          textAlign: "right",
+          fontWeight: "700"
+        } }, isFTEOnly ? "\u2013" : /* @__PURE__ */ React.createElement("span", { style: {
+          color: heatmapView ? uosHeatmap.color : getVarianceColor(uosVariance, true),
+          ...heatmapView && {
+            background: uosHeatmap.bg,
+            padding: "6px 12px",
+            borderRadius: "20px",
+            border: `2px solid ${uosHeatmap.border}`,
+            display: "inline-block"
+          }
+        } }, uosVariance > 0 ? "+" : "", uosVariance.toFixed(1), "%")), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          borderLeft: "1px solid #e2e8f0",
+          color: "#334155",
+          textAlign: "right",
+          fontWeight: "600"
+        } }, avgFTE.toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          color: "#64748b",
+          textAlign: "right"
+        } }, (site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / site.periods.length).toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          color: avgFTE - (site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / site.periods.length) > 0 ? "#dc2626" : "#16a34a",
+          textAlign: "right",
+          fontWeight: "600"
+        } }, (avgFTE - (site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / site.periods.length) > 0 ? "+" : "") + (avgFTE - (site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / site.periods.length)).toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          textAlign: "right",
+          fontWeight: "700"
+        } }, /* @__PURE__ */ React.createElement("span", { style: {
+          color: heatmapView ? fteHeatmap.color : getVarianceColor(fteVariance, false),
+          ...heatmapView && {
+            background: fteHeatmap.bg,
+            padding: "6px 12px",
+            borderRadius: "20px",
+            border: `2px solid ${fteHeatmap.border}`,
+            display: "inline-block"
+          }
+        } }, fteVariance > 0 ? "+" : "", fteVariance.toFixed(1), "%")), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          borderLeft: "1px solid #e2e8f0",
+          textAlign: "right",
+          fontWeight: "700"
+        } }, isFTEOnly ? "\u2013" : /* @__PURE__ */ React.createElement("span", { style: {
+          color: heatmapView ? prodHeatmap.color : "#2563eb",
+          ...heatmapView && {
+            background: prodHeatmap.bg,
+            padding: "6px 12px",
+            borderRadius: "20px",
+            border: `2px solid ${prodHeatmap.border}`,
+            display: "inline-block"
+          }
+        } }, productivity.toFixed(2))), /* @__PURE__ */ React.createElement("td", { style: {
+          padding: "12px",
+          borderBottom: "1px solid #e2e8f0",
+          textAlign: "center",
+          fontWeight: "600"
+        } }, (() => {
+          const assessment = getOverallAssessment(uosVariance, fteVariance);
+          return /* @__PURE__ */ React.createElement("span", { style: {
+            color: assessment.color,
+            background: `${assessment.color}15`,
+            padding: "6px 10px",
+            borderRadius: "6px",
+            border: `1px solid ${assessment.color}40`,
+            display: "inline-block",
+            fontSize: "12px",
+            textTransform: "capitalize",
+            whiteSpace: "nowrap"
+          } }, assessment.label);
+        })()));
+      });
+    })())))), selectedSite === "ROLLUP" && !tutorialMode && (() => {
+      const regularSites = filteredSites.filter((site) => !site.isOR && !site.isFTEOnly);
+      const orSite = filteredSites.find((site) => site.isOR);
+      const regularUOS = regularSites.reduce((sum, site) => sum + site.ytd.actualUOS, 0);
+      const regularBudgetUOS = regularSites.reduce((sum, site) => sum + site.ytd.budgetUOS, 0);
+      const regularUOSVariance = regularBudgetUOS > 0 ? (regularUOS - regularBudgetUOS) / regularBudgetUOS * 100 : 0;
+      const orMinutes = orSite ? orSite.ytd.actualUOS : 0;
+      const orBudgetMinutes = orSite ? orSite.ytd.budgetUOS : 0;
+      const orVariance = orBudgetMinutes > 0 ? (orMinutes - orBudgetMinutes) / orBudgetMinutes * 100 : 0;
+      const allActiveSites = filteredSites;
+      const rollupLabel = selectedManagers.length === 1 ? selectedManagers[0].toUpperCase() + " TEAM ROLL-UP" : selectedModalities.length === 1 && modalityConfig[selectedModalities[0]] ? modalityConfig[selectedModalities[0]].name.toUpperCase() + " SERVICES ROLL-UP" : "IMAGING SERVICES ROLL-UP";
+      const rollupAvgFTE = allActiveSites.reduce((sum, site) => {
+        const avgFTE = site.periods.reduce((s, p) => s + p.actualTotalFTE, 0) / site.periods.length;
+        return sum + avgFTE;
+      }, 0);
+      const rollupTargetFTE = allActiveSites.reduce((sum, site) => {
+        const avgTarget = site.periods.reduce((s, p) => s + p.targetTotalFTE, 0) / site.periods.length;
+        return sum + avgTarget;
+      }, 0);
+      const rollupFTEVariance = rollupTargetFTE > 0 ? (rollupAvgFTE - rollupTargetFTE) / rollupTargetFTE * 100 : 0;
+      const fteStatus = getFTEStatus(rollupFTEVariance);
+      const regularUOSStatus = getUOSStatus(regularUOSVariance);
+      const orStatus = getUOSStatus(orVariance);
+      const maxVarianceFTE = Math.max(Math.abs(rollupFTEVariance), 100);
+      const fteBarWidth = Math.abs(rollupFTEVariance) / maxVarianceFTE * 50;
+      const maxVarianceUOS = Math.max(Math.abs(regularUOSVariance), Math.abs(orVariance), 100);
+      const regularUOSBarWidth = Math.abs(regularUOSVariance) / maxVarianceUOS * 50;
+      const orBarWidth = Math.abs(orVariance) / maxVarianceUOS * 50;
+      return /* @__PURE__ */ React.createElement("div", { style: {
+        background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)",
+        border: "2px solid #2563eb",
+        borderRadius: "16px",
+        padding: "32px",
+        boxShadow: "0 4px 12px rgba(37, 99, 235, 0.15)",
+        marginBottom: "24px"
+      } }, /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "24px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "14px", color: "#1e40af", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "6px" } }, rollupLabel), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "32px", fontWeight: "700", color: "#1e3a8a", marginBottom: "6px" } }, "All Sites Combined"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "14px", color: "#3b82f6", fontWeight: "500" } }, allActiveSites.length, " sites \u2022 FY27 PP01-PP02 YTD")), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", marginBottom: "24px" } }, /* @__PURE__ */ React.createElement("div", { style: { background: "white", padding: "20px", borderRadius: "12px", border: "1px solid #bfdbfe" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "12px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "8px", fontWeight: "600" } }, "Patient Volume (UOS)"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#64748b", marginBottom: "12px" } }, regularSites.length, " sites (excluding OR)"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "36px", fontWeight: "700", color: "#0f172a", marginBottom: "8px" } }, regularUOS.toLocaleString()), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px", marginBottom: "12px", color: regularUOSVariance > 0 ? "#059669" : regularUOSVariance < 0 ? "#dc2626" : "#64748b" } }, regularUOSVariance > 0 ? /* @__PURE__ */ React.createElement(TrendingUp, { size: 16 }) : regularUOSVariance < 0 ? /* @__PURE__ */ React.createElement(TrendingDown, { size: 16 }) : /* @__PURE__ */ React.createElement(Minus, { size: 16 }), regularUOSVariance > 0 ? "+" : "", regularUOSVariance.toFixed(1), "% vs budget"), /* @__PURE__ */ React.createElement("div", { style: { ...getStatusStyle(regularUOSStatus.color), display: "flex", alignItems: "center", justifyContent: "center", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "600", gap: "6px" } }, regularUOSStatus.color === "excellent" || regularUOSStatus.color === "good" ? /* @__PURE__ */ React.createElement(CheckCircle, { size: 16 }) : regularUOSStatus.color === "monitor" ? /* @__PURE__ */ React.createElement(Eye, { size: 16 }) : /* @__PURE__ */ React.createElement(AlertCircle, { size: 16 }), /* @__PURE__ */ React.createElement("span", null, regularUOSStatus.label))), /* @__PURE__ */ React.createElement("div", { style: { background: "white", padding: "20px", borderRadius: "12px", border: "1px solid #d8b4fe" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "12px", color: "#7c3aed", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "8px", fontWeight: "600" } }, "OR Procedures"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#64748b", marginBottom: "12px" } }, "OR procedure volume"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "36px", fontWeight: "700", color: "#0f172a", marginBottom: "8px" } }, orMinutes.toLocaleString()), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px", marginBottom: "12px", color: orVariance > 0 ? "#059669" : orVariance < 0 ? "#dc2626" : "#64748b" } }, orVariance > 0 ? /* @__PURE__ */ React.createElement(TrendingUp, { size: 16 }) : orVariance < 0 ? /* @__PURE__ */ React.createElement(TrendingDown, { size: 16 }) : /* @__PURE__ */ React.createElement(Minus, { size: 16 }), orVariance > 0 ? "+" : "", orVariance.toFixed(1), "% vs budget"), /* @__PURE__ */ React.createElement("div", { style: { ...getStatusStyle(orStatus.color), display: "flex", alignItems: "center", justifyContent: "center", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "600", gap: "6px" } }, orStatus.color === "excellent" || orStatus.color === "good" ? /* @__PURE__ */ React.createElement(CheckCircle, { size: 16 }) : orStatus.color === "monitor" ? /* @__PURE__ */ React.createElement(Eye, { size: 16 }) : /* @__PURE__ */ React.createElement(AlertCircle, { size: 16 }), /* @__PURE__ */ React.createElement("span", null, orStatus.label))), /* @__PURE__ */ React.createElement("div", { style: { background: "white", padding: "20px", borderRadius: "12px", border: "1px solid #bfdbfe" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "12px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "8px", fontWeight: "600" } }, "Average Paid FTE"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#64748b", marginBottom: "12px" } }, "All ", allActiveSites.length, " sites combined"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "36px", fontWeight: "700", color: "#0f172a", marginBottom: "8px" } }, rollupAvgFTE.toFixed(1)), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px", marginBottom: "12px", color: rollupFTEVariance < 0 ? "#059669" : rollupFTEVariance > 0 ? "#dc2626" : "#64748b" } }, rollupFTEVariance < 0 ? /* @__PURE__ */ React.createElement(TrendingDown, { size: 16 }) : rollupFTEVariance > 0 ? /* @__PURE__ */ React.createElement(TrendingUp, { size: 16 }) : /* @__PURE__ */ React.createElement(Minus, { size: 16 }), rollupFTEVariance > 0 ? "+" : "", rollupFTEVariance.toFixed(1), "% vs budget"), /* @__PURE__ */ React.createElement("div", { style: { ...getStatusStyle(fteStatus.color), display: "flex", alignItems: "center", justifyContent: "center", padding: "10px", borderRadius: "8px", fontSize: "13px", fontWeight: "600", gap: "6px" } }, fteStatus.color === "excellent" || fteStatus.color === "good" ? /* @__PURE__ */ React.createElement(CheckCircle, { size: 16 }) : fteStatus.color === "monitor" ? /* @__PURE__ */ React.createElement(Eye, { size: 16 }) : /* @__PURE__ */ React.createElement(AlertCircle, { size: 16 }), /* @__PURE__ */ React.createElement("span", null, fteStatus.label)))), /* @__PURE__ */ React.createElement("div", { style: { background: "white", padding: "20px", borderRadius: "12px", border: "1px solid #e2e8f0" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "14px", color: "#475569", fontWeight: "600", marginBottom: "16px" } }, "Variance vs Budget"), /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "120px 1fr", gap: "16px", alignItems: "center" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#64748b", fontWeight: "600" } }, "Patient Volume"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, height: "36px", position: "relative" } }, /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", left: "50%", top: 0, bottom: 0, width: "2px", background: "#334155", transform: "translateX(-1px)", zIndex: 2 } }), /* @__PURE__ */ React.createElement("div", { style: { position: "relative", height: "100%", background: "#e2e8f0", borderRadius: "8px", overflow: "hidden" } }, regularUOSVariance !== 0 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { style: {
+        position: "absolute",
+        left: "8px",
+        top: "50%",
+        transform: "translateY(-50%)",
+        fontSize: "12px",
+        fontWeight: "700",
+        color: regularUOSVariance > 0 ? "#065f46" : "#991b1b",
+        zIndex: 2
+      } }, regularUOSVariance > 0 ? "+" : "", regularUOSVariance.toFixed(1), "%"), /* @__PURE__ */ React.createElement("div", { style: {
+        position: "absolute",
+        top: 0,
+        height: "100%",
+        width: regularUOSBarWidth + "%",
+        left: regularUOSVariance > 0 ? "50%" : 50 - regularUOSBarWidth + "%",
+        background: regularUOSVariance > 0 ? "linear-gradient(90deg, #10b981, #059669)" : "linear-gradient(90deg, #ef4444, #dc2626)",
+        borderRadius: "6px",
+        zIndex: 1
+      } })))), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#7c3aed", fontWeight: "600" } }, "OR Procedures"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, height: "36px", position: "relative" } }, /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", left: "50%", top: 0, bottom: 0, width: "2px", background: "#334155", transform: "translateX(-1px)", zIndex: 2 } }), /* @__PURE__ */ React.createElement("div", { style: { position: "relative", height: "100%", background: "#f3e8ff", borderRadius: "8px", overflow: "hidden" } }, orVariance !== 0 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { style: {
+        position: "absolute",
+        left: "8px",
+        top: "50%",
+        transform: "translateY(-50%)",
+        fontSize: "12px",
+        fontWeight: "700",
+        color: orVariance > 0 ? "#065f46" : "#991b1b",
+        zIndex: 2
+      } }, orVariance > 0 ? "+" : "", orVariance.toFixed(1), "%"), /* @__PURE__ */ React.createElement("div", { style: {
+        position: "absolute",
+        top: 0,
+        height: "100%",
+        width: orBarWidth + "%",
+        left: orVariance > 0 ? "50%" : 50 - orBarWidth + "%",
+        background: orVariance > 0 ? "linear-gradient(90deg, #10b981, #059669)" : "linear-gradient(90deg, #ef4444, #dc2626)",
+        borderRadius: "6px",
+        zIndex: 1
+      } })))), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#64748b", fontWeight: "600" } }, "Paid FTE"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, height: "36px", position: "relative" } }, /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", left: "50%", top: 0, bottom: 0, width: "2px", background: "#334155", transform: "translateX(-1px)", zIndex: 2 } }), /* @__PURE__ */ React.createElement("div", { style: { position: "relative", height: "100%", background: "#e2e8f0", borderRadius: "8px", overflow: "hidden" } }, rollupFTEVariance !== 0 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { style: {
+        position: "absolute",
+        left: "8px",
+        top: "50%",
+        transform: "translateY(-50%)",
+        fontSize: "12px",
+        fontWeight: "700",
+        color: rollupFTEVariance <= 0 ? "#065f46" : "#991b1b",
+        zIndex: 2
+      } }, rollupFTEVariance > 0 ? "+" : "", rollupFTEVariance.toFixed(1), "%"), /* @__PURE__ */ React.createElement("div", { style: {
+        position: "absolute",
+        top: 0,
+        height: "100%",
+        width: fteBarWidth + "%",
+        left: rollupFTEVariance <= 0 ? "50%" : 50 - fteBarWidth + "%",
+        background: rollupFTEVariance <= 0 ? "linear-gradient(90deg, #10b981, #059669)" : "linear-gradient(90deg, #ef4444, #dc2626)",
+        borderRadius: "6px",
+        zIndex: 1
+      } }))))), maxVarianceUOS > 100 && /* @__PURE__ */ React.createElement("div", { style: { fontSize: "11px", color: "#64748b", textAlign: "center", marginTop: "12px", fontStyle: "italic" } }, "Scale adjusted to \xC2\xB1", Math.max(maxVarianceUOS, maxVarianceFTE).toFixed(0), "%")));
+    })(), /* @__PURE__ */ React.createElement("div", { style: { display: tutorialMode ? "grid" : "grid", gridTemplateColumns: tutorialMode ? "450px 1fr" : "repeat(auto-fill, minmax(350px, 1fr))", gap: "24px" } }, filteredData.map((site) => {
+      const { uosVariance, fteVariance, productivity, isFTEOnly } = calculateMetrics(site);
+      const uosStatus = getUOSStatus(uosVariance);
+      const fteStatus = getFTEStatus(fteVariance);
+      const maxVariance = Math.max(Math.abs(uosVariance), Math.abs(fteVariance), 100);
+      const uosBarWidth = Math.abs(uosVariance) / maxVariance * 50;
+      const fteBarWidth = Math.abs(fteVariance) / maxVariance * 50;
+      return /* @__PURE__ */ React.createElement(
+        "div",
+        {
+          key: site.costCenter,
+          style: {
+            background: site.isOR ? "linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%)" : isFTEOnly ? "linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)" : "white",
+            border: site.isOR ? "1px solid #d8b4fe" : isFTEOnly ? "1px solid #fbbf24" : "1px solid #e2e8f0",
+            borderRadius: "16px",
+            padding: "20px",
+            boxShadow: "0 2px 8px rgba(0, 0, 0, 0.04)",
+            transition: "all 0.3s"
+          }
+        },
+        /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "16px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "12px", color: "#64748b", marginBottom: "4px" } }, site.costCenter), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "18px", fontWeight: "600", color: "#0f172a", marginBottom: "4px" } }, site.site), site.isOR && /* @__PURE__ */ React.createElement("div", { style: { display: "inline-block", background: "rgba(124, 58, 237, 0.15)", color: "#7c3aed", padding: "4px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "600", textTransform: "uppercase", marginTop: "4px" } }, "OR Procedures"), isFTEOnly && /* @__PURE__ */ React.createElement("div", { style: { display: "inline-block", background: "rgba(251, 191, 36, 0.2)", color: "#d97706", padding: "4px 10px", borderRadius: "6px", fontSize: "11px", fontWeight: "600", textTransform: "uppercase", marginTop: "4px" } }, "FTE Only")),
+        !isFTEOnly ? /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px", marginBottom: "16px" } }, /* @__PURE__ */ React.createElement(
+          "div",
+          {
+            style: {
+              background: "#f8fafc",
+              padding: "12px",
+              borderRadius: "12px",
+              border: tutorialMode && hoveredMetric === "ytdUOS" ? "2px solid #2563eb" : "1px solid #e2e8f0",
+              position: "relative",
+              cursor: tutorialMode ? "help" : "default",
+              transition: "all 0.2s"
+            },
+            onMouseEnter: () => tutorialMode && setHoveredMetric("ytdUOS"),
+            onMouseLeave: () => tutorialMode && setHoveredMetric(null)
+          },
+          /* @__PURE__ */ React.createElement("div", { style: { fontSize: "11px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "6px" } }, site.isOR ? "YTD OR Procedures" : "YTD UOS"),
+          /* @__PURE__ */ React.createElement("div", { style: { fontSize: "24px", fontWeight: "700", color: "#0f172a", marginBottom: "4px" } }, site.ytd.actualUOS.toLocaleString()),
+          /* @__PURE__ */ React.createElement("div", { style: { fontSize: "12px", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px", color: uosVariance > 0 ? "#059669" : uosVariance < 0 ? "#dc2626" : "#64748b" } }, uosVariance > 0 ? /* @__PURE__ */ React.createElement(TrendingUp, { size: 14 }) : uosVariance < 0 ? /* @__PURE__ */ React.createElement(TrendingDown, { size: 14 }) : /* @__PURE__ */ React.createElement(Minus, { size: 14 }), uosVariance > 0 ? "+" : "", uosVariance.toFixed(1), "% vs budget"),
+          tutorialMode && hoveredMetric === "ytdUOS" && /* @__PURE__ */ React.createElement("div", { style: {
+            position: "absolute",
+            top: "-8px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "#1e40af",
+            color: "white",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            fontSize: "13px",
+            width: "280px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            zIndex: 1e3,
+            pointerEvents: "none"
+          } }, site.isOR ? tooltips.ytdORMinutes : tooltips.ytdUOS)
+        ), /* @__PURE__ */ React.createElement(
+          "div",
+          {
+            style: {
+              background: "#f8fafc",
+              padding: "12px",
+              borderRadius: "12px",
+              border: tutorialMode && hoveredMetric === "totalFTE" ? "2px solid #2563eb" : "1px solid #e2e8f0",
+              position: "relative",
+              cursor: tutorialMode ? "help" : "default",
+              transition: "all 0.2s"
+            },
+            onMouseEnter: () => tutorialMode && setHoveredMetric("totalFTE"),
+            onMouseLeave: () => tutorialMode && setHoveredMetric(null)
+          },
+          /* @__PURE__ */ React.createElement("div", { style: { fontSize: "11px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "6px" } }, "Avg Paid FTE"),
+          /* @__PURE__ */ React.createElement("div", { style: { fontSize: "24px", fontWeight: "700", color: "#0f172a", marginBottom: "4px" } }, (site.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / site.periods.length).toFixed(1)),
+          /* @__PURE__ */ React.createElement("div", { style: { fontSize: "12px", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px", color: fteVariance < 0 ? "#059669" : fteVariance > 0 ? "#dc2626" : "#64748b" } }, fteVariance < 0 ? /* @__PURE__ */ React.createElement(TrendingDown, { size: 14 }) : fteVariance > 0 ? /* @__PURE__ */ React.createElement(TrendingUp, { size: 14 }) : /* @__PURE__ */ React.createElement(Minus, { size: 14 }), fteVariance > 0 ? "+" : "", fteVariance.toFixed(1), "% vs budget"),
+          tutorialMode && hoveredMetric === "totalFTE" && /* @__PURE__ */ React.createElement("div", { style: {
+            position: "absolute",
+            top: "-8px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "#1e40af",
+            color: "white",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            fontSize: "13px",
+            width: "280px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            zIndex: 1e3,
+            pointerEvents: "none"
+          } }, tooltips.totalFTE)
+        )) : /* @__PURE__ */ React.createElement("div", { style: { background: "#fef3c7", padding: "12px", borderRadius: "12px", border: "1px solid #fbbf24", marginBottom: "16px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "11px", color: "#d97706", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "6px" } }, "Avg Paid FTE"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "24px", fontWeight: "700", color: "#92400e", marginBottom: "4px" } }, (site.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / site.periods.length).toFixed(1)), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "12px", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px", color: fteVariance < 0 ? "#059669" : fteVariance > 0 ? "#dc2626" : "#64748b" } }, fteVariance < 0 ? /* @__PURE__ */ React.createElement(TrendingDown, { size: 14 }) : fteVariance > 0 ? /* @__PURE__ */ React.createElement(TrendingUp, { size: 14 }) : /* @__PURE__ */ React.createElement(Minus, { size: 14 }), fteVariance > 0 ? "+" : "", fteVariance.toFixed(1), "% vs budget")),
+        !isFTEOnly && /* @__PURE__ */ React.createElement(
+          "div",
+          {
+            style: {
+              background: "#f8fafc",
+              border: tutorialMode && hoveredMetric === "productivity" ? "2px solid #2563eb" : "1px solid #e2e8f0",
+              padding: "12px",
+              borderRadius: "12px",
+              marginBottom: "12px",
+              position: "relative",
+              cursor: tutorialMode ? "help" : "default",
+              transition: "all 0.2s"
+            },
+            onMouseEnter: () => tutorialMode && setHoveredMetric("productivity"),
+            onMouseLeave: () => tutorialMode && setHoveredMetric(null)
+          },
+          /* @__PURE__ */ React.createElement("div", { style: { fontSize: "11px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "6px" } }, site.isOR ? "Productivity (Hrs/Proc)" : "Productivity (Hrs/Proc)"),
+          /* @__PURE__ */ React.createElement("div", { style: { fontSize: "24px", fontWeight: "700", color: "#0f172a", marginBottom: "4px" } }, productivity.toFixed(2)),
+          (function() { var modTarget = (modalityConfig[site.modality] && modalityConfig[site.modality].productivityTarget) || 0.75; return /* @__PURE__ */ React.createElement("div", { style: { fontSize: "12px", fontWeight: "600", display: "flex", alignItems: "center", gap: "6px", color: productivity < modTarget ? "#059669" : productivity > modTarget ? "#dc2626" : "#64748b" } }, productivity < modTarget ? /* @__PURE__ */ React.createElement(TrendingDown, { size: 14 }) : productivity > modTarget ? /* @__PURE__ */ React.createElement(TrendingUp, { size: 14 }) : /* @__PURE__ */ React.createElement(Minus, { size: 14 }), productivity < modTarget ? "Favorable" : productivity > modTarget ? "Needs Improvement" : "At Target", " (target: " + modTarget.toFixed(2) + ")"); })(),
+          tutorialMode && hoveredMetric === "productivity" && /* @__PURE__ */ React.createElement("div", { style: {
+            position: "absolute",
+            top: "-8px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "#1e40af",
+            color: "white",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            fontSize: "13px",
+            width: "300px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            zIndex: 1e3,
+            pointerEvents: "none"
+          } }, site.isOR ? tooltips.productivityOR : tooltips.productivity)
+        ),
+        /* @__PURE__ */ React.createElement(
+          "div",
+          {
+            style: {
+              fontSize: "11px",
+              color: "#64748b",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              marginBottom: "6px",
+              cursor: tutorialMode ? "help" : "default",
+              position: "relative"
+            },
+            onMouseEnter: () => tutorialMode && setHoveredMetric("status"),
+            onMouseLeave: () => tutorialMode && setHoveredMetric(null)
+          },
+          "Performance Status",
+          tutorialMode && hoveredMetric === "status" && /* @__PURE__ */ React.createElement("div", { style: {
+            position: "absolute",
+            top: "-8px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "#1e40af",
+            color: "white",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            fontSize: "13px",
+            width: "280px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            zIndex: 1e3,
+            pointerEvents: "none"
+          } }, tooltips.status)
+        ),
+        !isFTEOnly ? /* @__PURE__ */ React.createElement("div", { style: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "12px" } }, /* @__PURE__ */ React.createElement("div", { style: { ...getStatusStyle(uosStatus.color), display: "flex", alignItems: "center", justifyContent: "center", padding: "8px 10px", borderRadius: "8px", fontSize: "12px", fontWeight: "600", gap: "6px" } }, uosStatus.color === "excellent" || uosStatus.color === "good" ? /* @__PURE__ */ React.createElement(CheckCircle, { size: 14 }) : uosStatus.color === "monitor" ? /* @__PURE__ */ React.createElement(Eye, { size: 14 }) : /* @__PURE__ */ React.createElement(AlertCircle, { size: 14 }), /* @__PURE__ */ React.createElement("span", null, site.isOR ? "OR Proc" : "UOS", ": ", uosStatus.label)), /* @__PURE__ */ React.createElement("div", { style: { ...getStatusStyle(fteStatus.color), display: "flex", alignItems: "center", justifyContent: "center", padding: "8px 10px", borderRadius: "8px", fontSize: "12px", fontWeight: "600", gap: "6px" } }, fteStatus.color === "excellent" || fteStatus.color === "good" ? /* @__PURE__ */ React.createElement(CheckCircle, { size: 14 }) : fteStatus.color === "monitor" ? /* @__PURE__ */ React.createElement(Eye, { size: 14 }) : /* @__PURE__ */ React.createElement(AlertCircle, { size: 14 }), /* @__PURE__ */ React.createElement("span", null, "FTE: ", fteStatus.label))) : /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "12px" } }, /* @__PURE__ */ React.createElement("div", { style: { ...getStatusStyle(fteStatus.color), display: "flex", alignItems: "center", justifyContent: "center", padding: "8px 10px", borderRadius: "8px", fontSize: "12px", fontWeight: "600", gap: "6px" } }, fteStatus.color === "excellent" || fteStatus.color === "good" ? /* @__PURE__ */ React.createElement(CheckCircle, { size: 14 }) : fteStatus.color === "monitor" ? /* @__PURE__ */ React.createElement(Eye, { size: 14 }) : /* @__PURE__ */ React.createElement(AlertCircle, { size: 14 }), /* @__PURE__ */ React.createElement("span", null, "FTE: ", fteStatus.label))),
+        /* @__PURE__ */ React.createElement(
+          "div",
+          {
+            style: {
+              marginBottom: "16px",
+              padding: "16px",
+              background: "#f8fafc",
+              borderRadius: "12px",
+              border: tutorialMode && hoveredMetric === "varianceChart" ? "2px solid #2563eb" : "1px solid #e2e8f0",
+              position: "relative",
+              cursor: tutorialMode ? "help" : "default",
+              transition: "all 0.2s"
+            },
+            onMouseEnter: () => tutorialMode && setHoveredMetric("varianceChart"),
+            onMouseLeave: () => tutorialMode && setHoveredMetric(null)
+          },
+          tutorialMode && hoveredMetric === "varianceChart" && /* @__PURE__ */ React.createElement("div", { style: {
+            position: "absolute",
+            top: "-8px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "#1e40af",
+            color: "white",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            fontSize: "13px",
+            width: "320px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            zIndex: 1e3,
+            pointerEvents: "none"
+          } }, tooltips.varianceChart),
+          /* @__PURE__ */ React.createElement("div", { style: { fontSize: "12px", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "16px", display: "flex", alignItems: "center", gap: "8px" } }, /* @__PURE__ */ React.createElement(Activity, { size: 14 }), "Variance from Budget"),
+          !isFTEOnly && /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", fontWeight: "600", color: "#475569", minWidth: "50px" } }, "UOS"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, height: "32px", position: "relative" } }, /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", left: "50%", top: 0, bottom: 0, width: "2px", background: "#334155", transform: "translateX(-1px)", zIndex: 2 } }, /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", top: "-16px", left: "50%", transform: "translateX(-50%)", fontSize: "10px", color: "#64748b", fontWeight: "600", textTransform: "uppercase", whiteSpace: "nowrap" } }, "Budget")), /* @__PURE__ */ React.createElement("div", { style: { position: "relative", height: "100%", background: "#e2e8f0", borderRadius: "8px", overflow: "hidden" } }, uosVariance !== 0 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { style: {
+            position: "absolute",
+            left: "8px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontSize: "11px",
+            fontWeight: "700",
+            color: uosVariance >= 0 ? "#065f46" : "#991b1b",
+            zIndex: 2
+          } }, uosVariance > 0 ? "+" : "", uosVariance.toFixed(1), "%"), /* @__PURE__ */ React.createElement("div", { style: {
+            position: "absolute",
+            top: 0,
+            height: "100%",
+            width: uosBarWidth + "%",
+            left: uosVariance >= 0 ? "50%" : 50 - uosBarWidth + "%",
+            background: uosVariance >= 0 ? "linear-gradient(90deg, #10b981, #059669)" : "linear-gradient(90deg, #ef4444, #dc2626)",
+            borderRadius: "6px",
+            transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+            zIndex: 1
+          } }))))),
+          /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "12px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", fontWeight: "600", color: "#475569", minWidth: "50px" } }, "FTE"), /* @__PURE__ */ React.createElement("div", { style: { flex: 1, height: "32px", position: "relative" } }, /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", left: "50%", top: 0, bottom: 0, width: "2px", background: "#334155", transform: "translateX(-1px)", zIndex: 2 } }, isFTEOnly && /* @__PURE__ */ React.createElement("div", { style: { position: "absolute", top: "-16px", left: "50%", transform: "translateX(-50%)", fontSize: "10px", color: "#64748b", fontWeight: "600", textTransform: "uppercase", whiteSpace: "nowrap" } }, "Budget")), /* @__PURE__ */ React.createElement("div", { style: { position: "relative", height: "100%", background: "#e2e8f0", borderRadius: "8px", overflow: "hidden" } }, fteVariance !== 0 && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("span", { style: {
+            position: "absolute",
+            left: "8px",
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontSize: "11px",
+            fontWeight: "700",
+            color: fteVariance <= 0 ? "#065f46" : "#991b1b",
+            zIndex: 2
+          } }, fteVariance > 0 ? "+" : "", fteVariance.toFixed(1), "%"), /* @__PURE__ */ React.createElement("div", { style: {
+            position: "absolute",
+            top: 0,
+            height: "100%",
+            width: fteBarWidth + "%",
+            left: fteVariance <= 0 ? "50%" : 50 - fteBarWidth + "%",
+            background: fteVariance <= 0 ? "linear-gradient(90deg, #10b981, #059669)" : "linear-gradient(90deg, #ef4444, #dc2626)",
+            borderRadius: "6px",
+            transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+            zIndex: 1
+          } }))))),
+          /* @__PURE__ */ React.createElement("div", { style: { display: "flex", justifyContent: "center", gap: "20px", marginTop: "10px", fontSize: "10px", color: "#64748b" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "6px" } }, /* @__PURE__ */ React.createElement("div", { style: { width: "20px", height: "12px", borderRadius: "3px", background: "linear-gradient(90deg, #ef4444, #dc2626)" } }), /* @__PURE__ */ React.createElement("span", null, "Unfavorable Variance")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "6px" } }, /* @__PURE__ */ React.createElement("div", { style: { width: "2px", height: "16px", background: "#334155" } }), /* @__PURE__ */ React.createElement("span", null, "Budget")), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "6px" } }, /* @__PURE__ */ React.createElement("div", { style: { width: "20px", height: "12px", borderRadius: "3px", background: "linear-gradient(90deg, #10b981, #059669)" } }), /* @__PURE__ */ React.createElement("span", null, "Favorable Variance"))),
+          maxVariance > 100 && /* @__PURE__ */ React.createElement("div", { style: { fontSize: "10px", color: "#64748b", textAlign: "center", marginTop: "8px", fontStyle: "italic" } }, "Scale adjusted to \xC2\xB1", maxVariance.toFixed(0), "%")
+        ),
+        /* @__PURE__ */ React.createElement(
+          "div",
+          {
+            style: {
+              marginTop: "16px",
+              overflowX: "auto",
+              border: tutorialMode && hoveredMetric === "periodTable" ? "2px solid #2563eb" : "none",
+              borderRadius: tutorialMode && hoveredMetric === "periodTable" ? "8px" : "0",
+              padding: tutorialMode && hoveredMetric === "periodTable" ? "4px" : "0",
+              position: "relative",
+              cursor: tutorialMode ? "help" : "default",
+              transition: "all 0.2s"
+            },
+            onMouseEnter: () => tutorialMode && setHoveredMetric("periodTable"),
+            onMouseLeave: () => tutorialMode && setHoveredMetric(null)
+          },
+          tutorialMode && hoveredMetric === "periodTable" && /* @__PURE__ */ React.createElement("div", { style: {
+            position: "absolute",
+            top: "-50px",
+            left: "50%",
+            transform: "translateX(-50%)",
+            background: "#1e40af",
+            color: "white",
+            padding: "12px 16px",
+            borderRadius: "8px",
+            fontSize: "13px",
+            width: "340px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+            zIndex: 1e3,
+            pointerEvents: "none"
+          } }, tooltips.periodTable),
+          /* @__PURE__ */ React.createElement("table", { style: { width: "100%", borderCollapse: "collapse", fontSize: "12px" } }, /* @__PURE__ */ React.createElement("thead", null, /* @__PURE__ */ React.createElement("tr", { style: { background: "#f1f5f9" } }, /* @__PURE__ */ React.createElement("th", { style: { padding: "8px 6px", textAlign: "left", fontSize: "10px", textTransform: "uppercase", color: "#475569", fontWeight: "600", borderBottom: "2px solid #cbd5e1" } }, "Period"), !isFTEOnly && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("th", { style: { padding: "8px 6px", textAlign: "right", fontSize: "10px", textTransform: "uppercase", color: "#475569", fontWeight: "600", borderBottom: "2px solid #cbd5e1" } }, site.isOR ? "Proc Act" : "UOS Act"), /* @__PURE__ */ React.createElement("th", { style: { padding: "8px 6px", textAlign: "right", fontSize: "10px", textTransform: "uppercase", color: "#475569", fontWeight: "600", borderBottom: "2px solid #cbd5e1" } }, site.isOR ? "Proc Tgt" : "UOS Tgt"), /* @__PURE__ */ React.createElement("th", { style: { padding: "8px 6px", textAlign: "right", fontSize: "10px", textTransform: "uppercase", color: "#475569", fontWeight: "600", borderBottom: "2px solid #cbd5e1" } }, site.isOR ? "Proc Var%" : "UOS Var%")), /* @__PURE__ */ React.createElement("th", { style: { padding: "8px 6px", textAlign: "right", fontSize: "10px", textTransform: "uppercase", color: "#475569", fontWeight: "600", borderBottom: "2px solid #cbd5e1" } }, "Paid FTE"), /* @__PURE__ */ React.createElement("th", { style: { padding: "8px 6px", textAlign: "right", fontSize: "10px", textTransform: "uppercase", color: "#475569", fontWeight: "600", borderBottom: "2px solid #cbd5e1" } }, "Flex FTE"), /* @__PURE__ */ React.createElement("th", { style: { padding: "8px 6px", textAlign: "right", fontSize: "10px", textTransform: "uppercase", color: "#475569", fontWeight: "600", borderBottom: "2px solid #cbd5e1" } }, "FTE Var%"))), /* @__PURE__ */ React.createElement("tbody", null, site.periods.map((period) => {
+            const uosVar = period.budgetUOS !== 0 ? (period.actualUOS - period.budgetUOS) / period.budgetUOS * 100 : 0;
+            const fteVar = period.targetTotalFTE !== 0 ? (period.actualTotalFTE - period.targetTotalFTE) / period.targetTotalFTE * 100 : 0;
+            return /* @__PURE__ */ React.createElement("tr", { key: period.period, style: { transition: "background 0.2s" } }, /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 6px", borderBottom: "1px solid #e2e8f0", color: "#334155", fontWeight: "600" } }, period.period), !isFTEOnly && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 6px", borderBottom: "1px solid #e2e8f0", color: "#334155", textAlign: "right", fontWeight: "700" } }, period.actualUOS.toLocaleString()), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 6px", borderBottom: "1px solid #e2e8f0", color: "#64748b", textAlign: "right", fontWeight: "500" } }, period.budgetUOS.toLocaleString()), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 6px", borderBottom: "1px solid #e2e8f0", textAlign: "right", fontWeight: "600" } }, /* @__PURE__ */ React.createElement("span", { style: { color: getVarianceColor(uosVar, true) } }, uosVar > 0 ? "+" : "", uosVar.toFixed(1), "%"))), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 6px", borderBottom: "1px solid #e2e8f0", color: "#334155", textAlign: "right", fontWeight: "700" } }, period.actualTotalFTE.toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 6px", borderBottom: "1px solid #e2e8f0", color: "#64748b", textAlign: "right", fontWeight: "500" } }, period.targetTotalFTE.toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: { padding: "8px 6px", borderBottom: "1px solid #e2e8f0", textAlign: "right", fontWeight: "600" } }, /* @__PURE__ */ React.createElement("span", { style: { color: getVarianceColor(fteVar, false) } }, fteVar > 0 ? "+" : "", fteVar.toFixed(1), "%")));
+          }), /* @__PURE__ */ React.createElement("tr", { style: { background: "#f1f5f9", fontWeight: "700" } }, /* @__PURE__ */ React.createElement("td", { style: { padding: "10px 6px", borderTop: "2px solid #cbd5e1", color: "#0f172a", fontWeight: "700" } }, "YTD"), !isFTEOnly && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("td", { style: { padding: "10px 6px", borderTop: "2px solid #cbd5e1", color: "#0f172a", textAlign: "right", fontWeight: "700" } }, site.ytd.actualUOS.toLocaleString()), /* @__PURE__ */ React.createElement("td", { style: { padding: "10px 6px", borderTop: "2px solid #cbd5e1", color: "#64748b", textAlign: "right", fontWeight: "600" } }, site.ytd.budgetUOS.toLocaleString()), /* @__PURE__ */ React.createElement("td", { style: { padding: "10px 6px", borderTop: "2px solid #cbd5e1", textAlign: "right", fontWeight: "700" } }, /* @__PURE__ */ React.createElement("span", { style: { color: getVarianceColor(uosVariance, true) } }, uosVariance > 0 ? "+" : "", uosVariance.toFixed(1), "%"))), /* @__PURE__ */ React.createElement("td", { style: { padding: "10px 6px", borderTop: "2px solid #cbd5e1", color: "#0f172a", textAlign: "right", fontWeight: "700" } }, (site.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / site.periods.length).toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: { padding: "10px 6px", borderTop: "2px solid #cbd5e1", color: "#64748b", textAlign: "right", fontWeight: "600" } }, (site.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / site.periods.length).toFixed(1)), /* @__PURE__ */ React.createElement("td", { style: { padding: "10px 6px", borderTop: "2px solid #cbd5e1", textAlign: "right", fontWeight: "700" } }, /* @__PURE__ */ React.createElement("span", { style: { color: getVarianceColor(fteVariance, false) } }, fteVariance > 0 ? "+" : "", fteVariance.toFixed(1), "%")))))
+        )
+      );
+    }), tutorialMode && tutorialSite && (() => {
+      let _allSites = []; Object.keys(data).forEach((mod) => { if (data[mod]) { _allSites = [..._allSites, ...data[mod]]; } }); const selectedSiteData = _allSites.find((s) => s.costCenter === tutorialSite);
+      if (!selectedSiteData) return null;
+      const { uosVariance, fteVariance, productivity, isFTEOnly } = calculateMetrics(selectedSiteData);
+      const avgFTE = selectedSiteData.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / selectedSiteData.periods.length;
+      const siteModality = selectedSiteData.modality;
+      const allProductivity = (data[siteModality] || []).filter((s) => !s.isFTEOnly && !s.isOR).map((s) => {
+        const totalProdFTE = s.periods.reduce((sum, p) => sum + (p.actualProdFTE || 0), 0);
+        const totalProdHours = totalProdFTE * 80;
+        return s.ytd.actualUOS > 0 ? totalProdHours / s.ytd.actualUOS : Infinity;
+      }).sort((a, b) => a - b);
+      const productivityRank = allProductivity.indexOf(productivity) + 1;
+      return /* @__PURE__ */ React.createElement("div", { style: { position: "sticky", top: "24px", alignSelf: "start" } }, /* @__PURE__ */ React.createElement("div", { style: { background: "white", border: "2px solid #2563eb", borderRadius: "12px", padding: "24px", boxShadow: "0 4px 12px rgba(37, 99, 235, 0.1)" } }, /* @__PURE__ */ React.createElement("div", { style: { display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" } }, /* @__PURE__ */ React.createElement("span", { style: { fontSize: "24px" } }, "\u{1F3AF}"), /* @__PURE__ */ React.createElement("h3", { style: { fontSize: "18px", fontWeight: "700", color: "#1e40af", margin: 0 } }, "Guided Analysis: ", selectedSiteData.site)), /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "20px", padding: "16px", background: "#f8fafc", borderRadius: "8px", borderLeft: "4px solid #2563eb" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "16px", fontWeight: "700", color: "#1e40af", marginBottom: "12px" } }, "Picture This Site"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "14px", color: "#475569", lineHeight: "1.6" } }, "Before diving into numbers, picture this site in your head. The equipment, the people, the typical day. Hold that image—it'll help the numbers make sense.")), !isFTEOnly && /* @__PURE__ */ React.createElement(React.Fragment, null, /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "20px", padding: "16px", background: "#f0fdf4", borderRadius: "8px", borderLeft: "4px solid #059669" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "16px", fontWeight: "700", color: "#047857", marginBottom: "8px" } }, "Volume"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "20px", fontWeight: "700", color: uosVariance >= 0 ? "#059669" : "#dc2626", marginBottom: "8px" } }, uosVariance > 0 ? "+" : "", uosVariance.toFixed(1), "% ", uosVariance >= 0 ? "above" : "below", " budget"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "14px", color: "#0f172a", marginBottom: "12px", lineHeight: "1.7" } }, uosVariance > 5 ? "Excellent—you're well above target. You're serving more patients than Finance expected, which means more revenue and better access for the community." : uosVariance > 0 ? "Good—you're slightly above where Finance expected. Meeting and exceeding demand." : uosVariance > -5 ? "Worth watching—you're slightly below target. Not alarming yet, but keep an eye on what's driving the gap." : "This needs attention—significantly below budget. Dig into what's happening: is demand down, or are there operational barriers?"), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: "8px", marginTop: "12px" } }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1, padding: "10px 12px", fontSize: "12px", color: "#166534", background: "#dcfce7", borderRadius: "6px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontWeight: "600", marginBottom: "4px", color: "#15803d", textTransform: "uppercase", fontSize: "10px", letterSpacing: "0.5px" } }, "The Numbers"), /* @__PURE__ */ React.createElement("strong", null, selectedSiteData.ytd.actualUOS.toLocaleString()), " actual vs ", /* @__PURE__ */ React.createElement("strong", null, selectedSiteData.ytd.budgetUOS.toLocaleString()), " budget"), (() => { const last3 = selectedSiteData.periods.slice(-3); const last3Avg = last3.reduce((sum, p) => sum + p.actualUOS, 0) / 3; const ytdAvg = selectedSiteData.ytd.actualUOS / selectedSiteData.periods.length; const pctDiff = (ytdAvg !== 0 ? (last3Avg - ytdAvg) / ytdAvg * 100 : 0).toFixed(1); const isUp = last3Avg > ytdAvg; return /* @__PURE__ */ React.createElement("div", { style: { flex: 1, padding: "10px 12px", fontSize: "12px", background: "#dcfce7", borderRadius: "6px", color: "#166534" } }, /* @__PURE__ */ React.createElement("div", { style: { fontWeight: "600", marginBottom: "4px", color: "#15803d", textTransform: "uppercase", fontSize: "10px", letterSpacing: "0.5px" } }, "Recent Trend"), "Last 3: ", /* @__PURE__ */ React.createElement("strong", null, Math.round(last3Avg).toLocaleString()), " vs YTD: ", Math.round(ytdAvg).toLocaleString(), " ", /* @__PURE__  */ React.createElement("span", { style: { color: isUp ? "#059669" : "#dc2626", fontWeight: "600" } }, "(", Math.abs(pctDiff), "% ", isUp ? "↑" : "↓", ")")); })()), /* @__PURE__ */ React.createElement("div", { style: { marginTop: "12px", padding: "10px 12px", background: "#f1f5f9", borderRadius: "6px", borderLeft: "3px solid #94a3b8" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "11px", fontWeight: "600", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "6px" } }, "Ask Yourself"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#334155", lineHeight: "1.5" } }, "If you had to bet on next period, would volume go up or down? What's the one thing that would move this number most?"))), /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "20px", padding: "16px", background: "#eff6ff", borderRadius: "8px", borderLeft: "4px solid #3b82f6" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "16px", fontWeight: "700", color: "#1e40af", marginBottom: "8px" } }, "Staffing"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "20px", fontWeight: "700", color: fteVariance <= 0 ? "#059669" : "#dc2626", marginBottom: "8px" } }, fteVariance > 0 ? "+" : "", fteVariance.toFixed(1), "% ", fteVariance <= 0 ? "under" : "over", " budget"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "14px", color: "#0f172a", marginBottom: "12px", lineHeight: "1.7" } }, fteVariance < -5 ? "Excellent—well under budget. You're using less labor than Finance expected. But don't celebrate just yet: check productivity below to make sure you're actually running efficiently, not just understaffed." : fteVariance < 0 ? "Good—slightly under budget. Finance is happy. You're managing labor costs while maintaining service." : fteVariance < 10 ? "Worth watching—slightly over budget. Not critical, but worth investigating: who's charging here, and can you tighten coverage during slower hours?" : "This needs attention—significantly over budget. Dig in now: are you overstaffed, or is someone charging time here who shouldn't be?"), /* @__PURE__ */ React.createElement("div", { style: { display: "flex", gap: "8px", marginTop: "12px" } }, /* @__PURE__ */ React.createElement("div", { style: { flex: 1, padding: "10px 12px", fontSize: "12px", color: "#1e40af", background: "#dbeafe", borderRadius: "6px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontWeight: "600", marginBottom: "4px", color: "#3b82f6", textTransform: "uppercase", fontSize: "10px", letterSpacing: "0.5px" } }, "The Numbers"), /* @__PURE__ */ React.createElement("strong", null, avgFTE.toFixed(1), " FTE"), " avg vs ", /* @__PURE__ */ React.createElement("strong", null, (selectedSiteData.periods.reduce((sum, p) => sum + p.targetTotalFTE, 0) / selectedSiteData.periods.length).toFixed(1)), " target"), (() => { const last3 = selectedSiteData.periods.slice(-3); const last3Avg = last3.reduce((sum, p) => sum + p.actualTotalFTE, 0) / 3; const ytdAvg = selectedSiteData.periods.reduce((sum, p) => sum + p.actualTotalFTE, 0) / selectedSiteData.periods.length; const pctDiff = (ytdAvg !== 0 ? (last3Avg - ytdAvg) / ytdAvg * 100 : 0).toFixed(1); const isDown = last3Avg < ytdAvg; return /* @__PURE__ */ React.createElement("div", { style: { flex: 1, padding: "10px 12px", fontSize: "12px", background: "#dbeafe", borderRadius: "6px", color: "#1e40af" } }, /* @__PURE__ */ React.createElement("div", { style: { fontWeight: "600", marginBottom: "4px", color: "#3b82f6", textTransform: "uppercase", fontSize: "10px", letterSpacing: "0.5px" } }, "Recent Trend"), "Last 3: ", /* @__PURE__ */ React.createElement("strong", null, last3Avg.toFixed(1)), " vs YTD: ", ytdAvg.toFixed(1), " ", /* @__PURE__ */ React.createElement("span", { style: { color: isDown ? "#059669" : "#dc2626", fontWeight: "600" } }, "(", Math.abs(pctDiff), "% ", isDown ? "↓" : "↑", ")")); })()), /* @__PURE__ */ React.createElement("div", { style: { marginTop: "12px", padding: "10px 12px", background: "#f1f5f9", borderRadius: "6px", borderLeft: "3px solid #94a3b8" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "11px", fontWeight: "600", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "6px" } }, "Ask Yourself"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#334155", lineHeight: "1.5" } }, "Could you do this volume with fewer people? Where's the slack in the schedule—early mornings, lunch hours, late afternoons? If you had to cut 0.5 FTE tomorrow, where would it come from?"))), /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "20px", padding: "16px", background: "#faf5ff", borderRadius: "8px", borderLeft: "4px solid #7c3aed" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "16px", fontWeight: "700", color: "#6d28d9", marginBottom: "12px" } }, "Bottom Line"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "16px", fontWeight: "700", color: "#0f172a", marginBottom: "12px" } }, "This site: ", /* @__PURE__ */ React.createElement("span", { style: {
+        color: getOverallAssessment(uosVariance, fteVariance).color,
+        textTransform: "uppercase"
+      } }, getOverallAssessment(uosVariance, fteVariance).label)), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "14px", color: "#0f172a", marginTop: "12px", lineHeight: "1.6" } }, /* @__PURE__ */ React.createElement("strong", null, "Why this assessment?"), /* @__PURE__ */ React.createElement("div", { style: { marginTop: "6px", paddingLeft: "12px" } }, (() => {
+        if (uosVariance < 0 && fteVariance <= uosVariance) {
+          return `For this site: Volume ${uosVariance.toFixed(1)}%, FTE ${fteVariance.toFixed(1)}%. Volume is down, but you've flexed staffing down appropriately (or even more). You've controlled what you can control - good management. Just monitor the demand trend.`;
+        } else if (uosVariance > 5 && fteVariance < 0 || uosVariance > 10 && fteVariance < 5) {
+          const threshold = uosVariance > 5 && fteVariance < 0 ? "(Volume >+5% AND FTE <0%)" : "(Volume >+10% AND FTE <+5%)";
+          return `For this site: Volume ${uosVariance > 0 ? "+" : ""}${uosVariance.toFixed(1)}%, FTE ${fteVariance > 0 ? "+" : ""}${fteVariance.toFixed(1)}%. Met Strong Performance threshold ${threshold}. Both your volume and staffing metrics are performing well - you're serving more patients while keeping labor costs in check. Excellent work!`;
+        } else if (uosVariance < -10 || fteVariance > 20 || uosVariance < -5 && fteVariance > 15) {
+          const threshold = uosVariance < -10 ? "Volume <-10%" : fteVariance > 20 ? "FTE >+20%" : "(Volume <-5% AND FTE >+15%)";
+          const reason = uosVariance < -10 ? "Volume is significantly below budget." : fteVariance > 20 ? "FTE is significantly over budget." : "Both volume and FTE are problematic.";
+          return `For this site: Volume ${uosVariance.toFixed(1)}%, FTE ${fteVariance > 0 ? "+" : ""}${fteVariance.toFixed(1)}%. Triggered ${threshold}. ${reason} This requires immediate attention.`;
+        } else if (uosVariance < -5 || fteVariance > 10 || uosVariance < 0 && fteVariance > 5) {
+          const threshold = uosVariance < -5 ? "Volume <-5%" : fteVariance > 10 ? "FTE >+10%" : "(Volume <0% AND FTE >+5%)";
+          const reason = uosVariance < -5 ? "Volume is notably below target." : fteVariance > 10 ? "FTE is notably over budget." : "Volume is below target and FTE is over budget.";
+          return `For this site: Volume ${uosVariance.toFixed(1)}%, FTE ${fteVariance > 0 ? "+" : ""}${fteVariance.toFixed(1)}%. Triggered ${threshold}. ${reason} You need to develop a plan to address this.`;
+        } else if (uosVariance < 0 || fteVariance > 0 || uosVariance < 3) {
+          const threshold = fteVariance > 0 ? "FTE >0%" : uosVariance < 0 ? "Volume <0%" : "Volume <+3%";
+          const reason = fteVariance > 0 ? "FTE is over budget. Even small overruns deserve monitoring." : "Metrics are slightly off target.";
+          return `For this site: Volume ${uosVariance > 0 ? "+" : ""}${uosVariance.toFixed(1)}%, FTE ${fteVariance > 0 ? "+" : ""}${fteVariance.toFixed(1)}%. Triggered ${threshold}. ${reason} Keep an eye on trends and be ready to adjust if things worsen.`;
+        } else {
+          return `For this site: Volume ${uosVariance > 0 ? "+" : ""}${uosVariance.toFixed(1)}%, FTE ${fteVariance > 0 ? "+" : ""}${fteVariance.toFixed(1)}%. Both metrics on target. You're hitting your targets - both volume and staffing are on track. Keep up the good work!`;
+        }
+      })())), /* @__PURE__ */ React.createElement("div", { style: { marginTop: "12px", padding: "10px 12px", background: "#f1f5f9", borderRadius: "6px", borderLeft: "3px solid #94a3b8" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "11px", fontWeight: "600", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "6px" } }, "Ask Yourself"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#334155", lineHeight: "1.5" } }, "Does this match your gut feeling? Based on what you know about operations, does this assessment make sense?"))), /* @__PURE__ */ React.createElement("div", { style: { marginBottom: "20px", padding: "16px", background: "#fef3c7", borderRadius: "8px", borderLeft: "4px solid #f59e0b" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "16px", fontWeight: "700", color: "#92400e", marginBottom: "8px" } }, "Productivity"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "20px", fontWeight: "700", color: productivityRank <= 3 ? "#059669" : productivityRank <= Math.ceil(allProductivity.length / 2) ? "#d97706" : "#dc2626", marginBottom: "8px" } }, "#", productivityRank, " out of ", allProductivity.length, " sites"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "14px", color: "#0f172a", marginBottom: "12px", lineHeight: "1.7" } }, productivityRank <= 3 ? "Outstanding. This site is in the top 3 for efficiency across your modality. You're getting more procedures done per hour of labor than almost everyone else. Worth studying: what are you doing right here that could be replicated elsewhere?" : productivityRank <= Math.ceil(allProductivity.length / 2) ? "Middle of the pack. Not terrible, but not exceptional either. The question is whether this is the right level for this site, or whether there's room to tighten things up. Look at your highest performers and see what they're doing differently." : "This site is using more hours per procedure than most. That's not necessarily bad if there's a reason (complex exams, training, equipment issues), but it's worth investigating. If you can't explain it, it's probably an opportunity."), /* @__PURE__ */ React.createElement("div", { style: { marginTop: "12px", padding: "10px 12px", fontSize: "12px", color: "#92400e", background: "#fde68a", borderRadius: "6px" } }, /* @__PURE__ */ React.createElement("div", { style: { fontWeight: "600", marginBottom: "4px", color: "#b45309", textTransform: "uppercase", fontSize: "10px", letterSpacing: "0.5px" } }, "The Number"), /* @__PURE__ */ React.createElement("strong", null, productivity.toFixed(2), " hours per procedure"), " ", /* @__PURE__ */ React.createElement("span", { style: { color: "#a16207", fontStyle: "italic" } }, "(lower is better)")), /* @__PURE__ */ React.createElement("div", { style: { marginTop: "12px", padding: "10px 12px", background: "#f1f5f9", borderRadius: "6px", borderLeft: "3px solid #94a3b8" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "11px", fontWeight: "600", color: "#64748b", textTransform: "uppercase", letterSpacing: "0.5px", marginBottom: "6px" } }, "Ask Yourself"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#334155", lineHeight: "1.5" } }, "Why is this site where it is? What's the exam mix like? If you were going to move this site up 3 spots in the ranking, what would you change?")))), /* @__PURE__ */ React.createElement("div", { style: { padding: "16px", background: "#fef2f2", borderRadius: "8px", borderLeft: "4px solid #dc2626" } }, /* @__PURE__ */ React.createElement("div", { style: { fontSize: "16px", fontWeight: "700", color: "#991b1b", marginBottom: "12px" } }, "What To Do"), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#0f172a", marginBottom: "12px" } }, /* @__PURE__ */ React.createElement("strong", null, "If FTE is too high:"), /* @__PURE__ */ React.createElement("div", { style: { marginTop: "6px", paddingLeft: "12px", fontSize: "12px" } }, "\u2022 Check who's clocking into this cost center - are non-site staff charging here?", /* @__PURE__ */ React.createElement("br", null), "\u2022 Review the schedule during low-volume hours - can we reduce coverage?", /* @__PURE__ */ React.createElement("br", null), "\u2022 Look at break/lunch coverage - are we overstaffing transitions?", /* @__PURE__ */ React.createElement("br", null), "\u2022 Compare to similar sites - are they running leaner? What can we learn?")), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#0f172a", marginBottom: "12px" } }, /* @__PURE__ */ React.createElement("strong", null, "If volume is too low:"), /* @__PURE__ */ React.createElement("div", { style: { marginTop: "6px", paddingLeft: "12px", fontSize: "12px" } }, "\u2022 Can we shift volume from busier sites to this site?", /* @__PURE__ */ React.createElement("br", null), "\u2022 Are referring clinics aware of this site's availability?", /* @__PURE__ */ React.createElement("br", null), "\u2022 Can we adjust hours to better match demand patterns?", /* @__PURE__ */ React.createElement("br", null), "\u2022 Should we flex staff out to other locations during slow periods?")), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#0f172a", marginBottom: "12px" } }, /* @__PURE__ */ React.createElement("strong", null, "If productivity is low:"), /* @__PURE__ */ React.createElement("div", { style: { marginTop: "6px", paddingLeft: "12px", fontSize: "12px" } }, "\u2022 Review workflows - are there bottlenecks or inefficiencies?", /* @__PURE__ */ React.createElement("br", null), "\u2022 Check equipment - is everything functioning optimally?", /* @__PURE__ */ React.createElement("br", null), "\u2022 Look at exam mix - are we doing more complex, time-intensive exams?", /* @__PURE__ */ React.createElement("br", null), "\u2022 Compare to high-performing sites - what are they doing differently?")), /* @__PURE__ */ React.createElement("div", { style: { fontSize: "13px", color: "#ffffff", fontStyle: "italic", background: "#991b1b", padding: "14px", borderRadius: "6px", marginTop: "16px", fontWeight: "600" } }, "\u2713 ", /* @__PURE__ */ React.createElement("strong", null, "CALL TO ACTION:"), " Write down (on paper or in your notes):", /* @__PURE__ */ React.createElement("div", { style: { marginTop: "8px", paddingLeft: "12px" } }, "1. List 2-3 specific interventions you could try", /* @__PURE__ */ React.createElement("br", null), '2. For each, estimate the impact (e.g., "Could save 0.2 FTE" or "Could add 50 patients/month")', /* @__PURE__ */ React.createElement("br", null), "3. When can you start? Pick a date for each intervention", /* @__PURE__ */ React.createElement("br", null), "4. Schedule a follow-up to review progress in 2-3 pay periods")))));
+    })()));
+  };
+  var root = ReactDOM.createRoot(document.getElementById("root"));
+  root.render(/* @__PURE__ */ React.createElement(UnifiedImagingDashboard, null));
+})();
+</script></body></html>
